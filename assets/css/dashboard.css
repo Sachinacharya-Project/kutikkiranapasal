@@ -1,0 +1,823 @@
+.main_container {
+  height: 100vh;
+  width: 100%;
+  display: block;
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.main_container .left_parts {
+  width: 300px;
+  height: 100%;
+  display: block;
+  padding: 10px 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.main_container .left_parts .intro_parts {
+  width: 100%;
+  height: 105px;
+}
+
+.main_container .left_parts .intro_parts .proimage {
+  height: 60px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.main_container .left_parts .intro_parts .proimage img {
+  height: 100%;
+}
+
+.main_container .left_parts .intro_parts .userdetails {
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  padding: 5px 0;
+}
+
+.main_container .left_parts .intro_parts .userdetails .username {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  letter-spacing: -1px;
+  color: black;
+  font-size: 16px;
+}
+
+.main_container .left_parts .intro_parts .userdetails .userpost {
+  font-family: "Roboto", sans-serif;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.main_container .left_parts .links {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.main_container .left_parts .links li {
+  padding: 10px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  -webkit-transition: 0.3s all linear;
+  transition: 0.3s all linear;
+  color: white;
+}
+
+.main_container .left_parts .links li.sectionactive {
+  background: white;
+  color: black;
+}
+
+.main_container .left_parts .links li:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.main_container .right_parts {
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.main_container .right_parts .top_menus {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px;
+  width: 100%;
+}
+
+.main_container .right_parts .top_menus .hamburgers {
+  width: 50px;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: -5px;
+}
+
+.main_container .right_parts .top_menus .hamburgers .ham {
+  width: 100%;
+  background: white;
+  height: 5px;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.main_container .right_parts .top_menus .heading {
+  color: white;
+  font-family: "Oswald", sans-serif;
+  font-weight: normal;
+  padding: 6px 10px;
+  width: calc(100% - 260px);
+  font-size: 20px;
+}
+
+.main_container .right_parts .top_menus .userprofiles {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 50px;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+.main_container .right_parts .top_menus .userprofiles .profileimage {
+  height: 100%;
+  width: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main_container .right_parts .top_menus .userprofiles .profileimage img {
+  height: 100%;
+}
+
+.main_container .right_parts .top_menus .userprofiles .userdetails {
+  padding: 5px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: right;
+}
+
+.main_container .right_parts .top_menus .userprofiles .userdetails .username {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  letter-spacing: -1px;
+  font-size: 17px;
+}
+
+.main_container .right_parts .top_menus .userprofiles .userdetails .userpost {
+  font-family: "Roboto", sans-serif;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0px;
+}
+
+.sidesections {
+  height: 100%;
+  width: 100%;
+}
+
+.allboards {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+
+.allboards.of_dashboard, .allboards.of_transactions {
+  display: none;
+}
+
+.allboards.of_dashboard.opendiv, .allboards.of_transactions.opendiv {
+  display: block;
+}
+
+.allboards .summary {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.allboards .summary div {
+  height: 200px;
+  width: 200px;
+  text-align: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.allboards .summary div i {
+  font-size: 110px;
+  color: white;
+}
+
+.allboards .summary div h1 {
+  color: black;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  padding: 0 0 10px 0;
+}
+
+.allboards .summary div p {
+  font-family: "Roboto", sans-serif;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+}
+
+.allboards .newcustomers {
+  width: 100%;
+  padding: 10px 60px;
+}
+
+.allboards .newcustomers h1 {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 23px;
+}
+
+.allboards .newcustomers ul {
+  list-style: none;
+}
+
+.allboards .newcustomers ul li {
+  width: 100%;
+  padding: 5px 0;
+  color: black;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
+
+.allboards .history {
+  width: 100%;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+
+.allboards .history div {
+  padding: 1px;
+}
+
+.allboards .history div h1 {
+  font-size: 17px;
+  font-weight: normal;
+}
+
+.allboards .history div:nth-last-child(1) h1 {
+  color: orangered;
+  font-weight: bold;
+  text-shadow: 0 0 20px #000;
+}
+
+.allboards .topmemenus {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+}
+
+.allboards .topmemenus h1 {
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+.allboards .topmemenus button {
+  padding: 0px 10px;
+  border: none;
+  outline: none;
+  height: 30px;
+  margin-top: -3px;
+  background: rgba(255, 255, 255, 0.4);
+  color: white;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  cursor: pointer;
+}
+
+.allboards .topmemenus button:active {
+  background: white;
+  color: black;
+}
+
+.allboards .creating_orders {
+  display: none;
+  max-width: 450px;
+  width: 450px;
+  background: #111111;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: 1000;
+  border-radius: 10px;
+}
+
+.allboards .creating_orders.activate {
+  display: block;
+}
+
+.allboards .creating_orders h1 {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  padding: 20px 15px 15px 15px;
+  font-size: 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.allboards .creating_orders h1 span {
+  width: 100%;
+}
+
+.allboards .creating_orders h1 button {
+  background: none;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 25px;
+  justify-self: flex-end;
+  width: 50px;
+  color: red;
+  cursor: pointer;
+  text-shadow: 0 0 20px #ccc;
+}
+
+.allboards .creating_orders h1 button:active {
+  color: black;
+}
+
+.allboards .creating_orders div {
+  padding: 10px;
+}
+
+.allboards .creating_orders .customers-name {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 20px;
+}
+
+.allboards .creating_orders .customers-name input, .allboards .creating_orders .customers-name label {
+  display: block;
+}
+
+.allboards .creating_orders .customers-name label {
+  padding: 10px 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+}
+
+.allboards .creating_orders .customers-name input {
+  padding: 6px;
+  border: none;
+  font-size: 15px;
+  outline: none;
+  text-transform: capitalize;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+
+.allboards .creating_orders .customers-name button {
+  width: 200px;
+  margin-top: 10px;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  padding: 10px;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background: #000;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.allboards .creating_orders .customers-name button:active {
+  background: white;
+  color: black;
+}
+
+.allboards .creating_orders .items-details {
+  max-height: 350px;
+  height: 210px;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: visible;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.allboards .creating_orders .items-details div {
+  width: 100%;
+  height: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+}
+
+.allboards .creating_orders .items-details div input, .allboards .creating_orders .items-details div span {
+  padding: 10px;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
+
+.allboards .creating_orders .items-details div span {
+  color: white;
+  font-size: 16px;
+}
+
+.allboards .creating_orders .submitButton {
+  width: 100%;
+}
+
+.allboards .creating_orders .submitButton input {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  border: none;
+  outline: none;
+  color: white;
+  background: #000;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.allboards .creating_orders .submitButton input:active {
+  background: white;
+  color: black;
+}
+
+.allboards .viewing-orders {
+  width: 100%;
+  padding: 30px 0px;
+  list-style: none;
+  display: none;
+  max-height: 400px;
+  margin-top: 10px;
+  overflow: hidden;
+  overflow-y: visible;
+  gap: 10px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.allboards .viewing-orders.activate {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.allboards .viewing-orders li {
+  width: 300px;
+  background: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+}
+
+.allboards .viewing-orders li:active {
+  background: black;
+  color: white;
+}
+
+.allboards .viewing-orders li p {
+  font-family: "Roboto", sans-serif;
+  padding: 2px 0;
+}
+
+.allboards .viewing-orders li p:nth-of-type(1) {
+  color: white;
+  font-size: 16px;
+  text-shadow: 0 0 20px #000;
+  letter-spacing: -1px;
+}
+
+.allboards .showing_output {
+  height: calc(100% - 70px);
+  width: calc(100% - 100px);
+  background: black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: none;
+}
+
+.allboards .showing_output.activate {
+  display: block;
+}
+
+.allboards .showing_output .options_menus {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding: 10px 10px;
+  gap: 10px;
+}
+
+.allboards .showing_output .options_menus button {
+  height: 30px;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  background: none;
+  cursor: pointer;
+}
+
+.allboards .showing_output .options_menus button:nth-of-type(1) {
+  width: 100px;
+  background: rgba(3, 191, 248, 0.8);
+  -webkit-backdrop-filter: blur(100px);
+          backdrop-filter: blur(100px);
+  font-weight: bold;
+}
+
+.allboards .showing_output .options_menus button:nth-last-of-type(1) {
+  width: 50px;
+  font-size: 23px;
+  color: red;
+}
+
+.allboards .showing_output .options_menus button:active {
+  color: white;
+  background: black !important;
+}
+
+.allboards .showing_output .contents {
+  width: 100%;
+}
+
+.allboards .showing_output .contents .introduction {
+  width: 100%;
+  color: white;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+}
+
+.allboards .showing_output .contents .basics {
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+  padding: 10px;
+  gap: 10px;
+  color: white;
+  text-shadow: 0 0 20px #000;
+}
+
+.allboards .showing_output .contents .basics table tr td {
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+.allboards .showing_output .contents .basics table tr td:nth-last-of-type(1) {
+  text-align: left;
+}
+
+.allboards .showing_output .contents .basics table tr td:nth-of-type(1) {
+  text-align: right;
+}
+
+.allboards .showing_output .contents .allitems {
+  width: 100%;
+  padding: 20px 40px;
+}
+
+.allboards .showing_output .contents .allitems table {
+  width: 100%;
+  color: white;
+}
+
+.allboards .showing_output .contents .allitems table tr:nth-of-type(1) td {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.allboards .showing_output .contents .allitems table tr td {
+  min-width: 200px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  padding: 5px;
+}
+
+.allboards .showing_output_of_orders {
+  width: 450px;
+  max-width: 450px;
+  background: #000;
+  height: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  border-radius: 10px;
+  color: white;
+  padding: 10px;
+  display: none;
+}
+
+.allboards .showing_output_of_orders.activate {
+  display: block;
+}
+
+.allboards .showing_output_of_orders h1 {
+  padding: 14px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.allboards .showing_output_of_orders h1 span {
+  width: 100%;
+}
+
+.allboards .showing_output_of_orders h1 button {
+  justify-self: flex-end;
+  padding: 0 10px;
+  font-size: 20px;
+  color: red;
+  text-shadow: 0 0 20px #ccc;
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.allboards .showing_output_of_orders h1 button:active {
+  background: red;
+  color: white;
+}
+
+.allboards .showing_output_of_orders .details p {
+  padding: 5px 10px;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.allboards .showing_output_of_orders .details p span {
+  font-weight: normal;
+  padding: 0px 10px;
+}
+
+.allboards .showing_output_of_orders .itemlist {
+  padding: 10px;
+  font-family: "Roboto", sans-serif;
+  max-height: 250px;
+  height: 250px;
+  overflow: hidden;
+  overflow-y: visible;
+}
+
+.allboards .showing_output_of_orders .itemlist p {
+  padding: 10px 10px;
+  width: 100%;
+  background: #fff;
+  color: #000;
+  margin: 5px 0;
+}
+
+.allboards .showing_output_of_orders .buttons {
+  width: 100%;
+  height: 60px;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  gap: 10px;
+}
+
+.allboards .showing_output_of_orders .buttons button {
+  width: 100%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.allboards .showing_output_of_orders .buttons button:active {
+  background: #000;
+  color: white;
+  cursor: progress;
+}
+
+.pending {
+  color: orangered;
+}
+
+.complete {
+  color: green;
+}
+
+.cancel {
+  color: red;
+}
+
+select {
+  display: block;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+/* GENERATED BY SACHIN */
+/*# sourceMappingURL=dashboard.css.map */

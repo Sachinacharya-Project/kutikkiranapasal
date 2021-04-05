@@ -1,0 +1,710 @@
+$allan: 'Allan', cursive;
+$anton: 'Anton', sans-serif;
+$bebas: 'Bebas Neue', cursive;
+$courgette: 'Courgette', cursive;
+$inbue: 'Imbue', serif;
+$kaushan: 'Kaushan Script', cursive;
+$lobster: 'Lobster', cursive;
+$nove: 'Nova Square', cursive;
+$oswald: 'Oswald', sans-serif;
+$pathway: 'Pathway Gothic One', sans-serif;
+$poppins: 'Poppins', sans-serif;
+$potta: 'Potta One', cursive;
+$pt: 'PT Sans Narrow', sans-serif;
+$righteous: 'Righteous', cursive;
+$roboto: 'Roboto', sans-serif;
+$squada: 'Squada One', cursive;
+$teko: 'Teko', sans-serif;
+$trade: 'Trade Winds', cursive;
+$yenone: 'Yanone Kaffeesatz', sans-serif;
+$yellow: 'Yellowtail', cursive;
+
+.main_container{
+    height: 100vh;
+    width: 100%;
+    display: block;
+    backdrop-filter: blur(2px);
+    display: flex;
+    .left_parts{
+        width: 300px;
+        height: 100%;
+        display: block;
+        padding: 10px 0;
+        border-right: 1px solid rgba(#fff, 0.4);
+
+        .intro_parts{
+            width: 100%;
+            height: 105px;
+            .proimage{
+                height: 60px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                img{
+                    height: 100%;
+                }
+            }
+
+            .userdetails{
+                width: 100%;
+                height: 40px;
+                text-align: center;
+                padding: 5px 0;
+
+                .username{
+                    font-family: $roboto;
+                    font-weight: bold;
+                    letter-spacing: -1px;
+                    color: black;
+                    font-size: 16px;
+                }
+
+                .userpost{
+                    font-family: $roboto;
+                    color: rgba(#fff, 0.6);
+                }
+            }
+        }
+
+        .links{
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+            li{
+                padding: 10px;
+                width: 100%;
+                background: rgba(#fff, 0.1);
+                backdrop-filter: blur(10px);
+                font-family: $roboto;
+                font-weight: bold;
+                font-size: 15px;
+                cursor: pointer;
+                border-radius: 5px;
+                transition: 0.3s all linear;
+                color: white;
+                &.sectionactive{
+                    background: white;
+                    color: black;
+                }
+
+                &:hover{
+                    background: rgba(white, 0.6);
+                }
+            }
+        }
+    }
+
+    .right_parts{
+        width: 100%;
+        overflow: hidden;
+        overflow-y: scroll;
+        
+        .top_menus{
+            display: flex;
+            padding: 10px;
+            width: 100%;
+            
+            .hamburgers{
+                width: 50px;
+                height: 50px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                padding: 10px;
+                cursor: pointer;
+                margin-top: -5px;
+                .ham{
+                    width: 100%;
+                    background: white;
+                    height: 5px;
+                    border-radius: 5px;
+                    pointer-events: none;
+                }
+            }
+            
+            .heading{
+                color: white;
+                font-family: $oswald;
+                font-weight: normal;
+                padding: 6px 10px;
+                width: calc(100% - 260px);
+                font-size: 20px;
+            }
+            
+            .userprofiles{
+                display: flex;
+                height: 50px;
+                align-self: flex-end;
+                .profileimage{
+                    height: 100%;
+                    width: 60px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    img{
+                        height: 100%;
+                    }
+                }
+                
+                .userdetails{
+                    padding: 5px 10px;
+                    display: flex;
+                    flex-direction: column;
+                    text-align: right;
+                    
+                    .username{
+                        font-family: $roboto;
+                        font-weight: bold;
+                        letter-spacing: -1px;
+                        font-size: 17px;
+                }
+
+                .userpost{
+                    font-family: $roboto;
+                    color: rgba(#fff, 0.6);
+                    letter-spacing: 0px;
+                }
+            }
+        }
+    }
+}
+}
+
+.sidesections{
+    height: 100%;
+    width: 100%;
+}
+.allboards{
+    display: block;
+    &.of_dashboard, &.of_transactions{
+        display: none;
+        &.opendiv{
+            display: block;
+        }
+    }
+
+    width: 100%;
+    height: 100%;
+    // background: red;
+    padding: 20px;
+
+    .summary{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+
+        div{
+            height: 200px;
+            width: 200px;
+            text-align: center;
+            padding: 10px;
+            background: rgba(#fff, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            cursor: pointer;
+            i{
+                font-size: 110px;
+                color: white;
+            }
+
+            h1{
+                color: black;
+                font-family: $roboto;
+                font-weight: bold;
+                padding: 0 0 10px 0;
+            }
+
+            p{
+                font-family: $roboto;
+                color: rgba(#fff, 0.6);
+                font-size: 16px;
+            }
+        }
+    }
+
+    .newcustomers{
+        width: 100%;
+        padding: 10px 60px;
+
+        h1{
+            color: white;
+            font-family: $roboto;
+            font-size: 23px;
+        }
+
+        ul{
+            list-style: none;
+            li{
+                width: 100%;
+                padding: 5px 0;
+                color: black;
+                font-family: $roboto;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .history{
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        color: white;
+        font-family: $roboto;
+        justify-content: space-around;
+        background: rgba(#fff, 0.3);
+        backdrop-filter: blur(10px);
+        div{
+            padding: 1px;
+            h1{
+                font-size: 17px;
+                font-weight: normal;
+            }
+            &:nth-last-child(1) h1{
+                color: orangered;
+                font-weight: bold;
+                text-shadow: 0 0 20px #000;
+            }
+        }
+    }
+
+    .topmemenus{
+        width: 100%;
+        display: flex;
+        gap: 10px;
+
+        h1{
+            color: white;
+            font-family: $roboto;
+        }
+
+        button{
+            padding: 0px 10px;
+            border: none;
+            outline: none;
+            height: 30px;
+            margin-top: -3px;
+            background: rgba(#fff, 0.4);
+            color: white;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+
+            &:active{
+                background: white;
+                color: black;
+            }
+        }
+    }
+
+    .creating_orders{
+        display: none;
+        &.activate{
+            display: block;
+        }
+        max-width: 450px;
+        width: 450px;
+        background: rgba(#111, 1);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        border-radius: 10px;
+
+        h1{
+            color: white;
+            font-family: $roboto;
+            text-align: center;
+            padding: 20px 15px 15px 15px;
+            font-size: 25px;
+            display: flex;
+            span{
+                width: 100%;
+            }
+            button{
+                background: none;
+                border: none;
+                outline: none;
+                color: white;
+                font-size: 25px;
+                justify-self: flex-end;
+                width: 50px;
+                color: red;
+                cursor: pointer;
+                text-shadow: 0 0 20px #ccc;
+                &:active{
+                    color: black;
+                }
+            }
+        }
+
+        div{
+            padding: 10px;
+        }
+        .customers-name{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            color: white;
+            font-family: $roboto;
+            flex-direction: column;
+            padding: 20px;
+            input, label{
+                display: block;
+            }
+            label{
+                padding: 10px 0;
+                font-family: $roboto;
+                font-size: 16px;
+            }
+            input{
+                padding: 6px;
+                border: none;
+                font-size: 15px;
+                outline: none;
+                text-transform: capitalize;
+                font-family: $roboto;
+                letter-spacing: -1px;
+                font-weight: bold;
+            }
+
+            button{
+                width: 200px;
+                margin-top: 10px;
+                align-self: flex-end;
+                padding: 10px;
+                color: white;
+                font-family: $roboto;
+                font-size: 16px;
+                border: none;
+                outline: none;
+                background: #000;
+                cursor: pointer;
+                font-weight: bold;
+                &:active{
+                    background: white;
+                    color: black;
+                }
+            }
+        }
+
+        .items-details{
+            max-height: 350px;
+            height: 210px;
+            width: 100%;
+            overflow: hidden;
+            overflow-y: visible;
+            display: flex;
+            flex-direction: column;
+
+            div{
+                width: 100%;
+                height: 200px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                input, span{
+                    padding: 10px;
+                    width: 100%;
+                    border: none;
+                    outline: none;
+                    font-family: $roboto;
+                    font-weight: bold;
+                }
+
+                span{
+                    color: white;
+                    font-size: 16px;
+                }
+            }
+        }
+
+        .submitButton{
+            width: 100%;
+            input{
+                width: 100%;
+                padding: 10px;
+                text-align: center;
+                border: none;
+                outline: none;
+                color: white;
+                background: #000;
+                font-family: $roboto;
+                font-size: 16px;
+                cursor: pointer;
+
+                &:active{
+                    background: white;
+                    color: black;
+                }
+            }
+        }
+    }
+
+    .viewing-orders{
+        width: 100%;
+        padding: 30px 0px;
+        list-style: none;
+        display: none;
+        max-height: 400px;
+        margin-top: 10px;
+        overflow: hidden;
+        overflow-y: visible;
+        &.activate{
+            display: flex;
+        }
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        li{
+            width: 300px;
+            background: rgba(#fff, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: $roboto;
+            &:active{
+                background: black;
+                color: white;
+            }
+            p{
+                &:nth-of-type(1){
+                    color: white;
+                    font-size: 16px;
+                    text-shadow: 0 0 20px #000;
+                    letter-spacing: -1px;
+                }
+
+                font-family: $roboto;
+                padding: 2px 0;
+            }
+        }
+    }
+
+    .showing_output{
+        height: calc(100% - 70px);
+        width: calc(100% - 100px);
+        background: rgba(#000, 1);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+        &.activate{
+            display: block;
+        }
+        .options_menus{
+            display: flex;
+            width: 100%;
+            justify-content: flex-end;
+            padding: 10px 10px;
+            gap: 10px;
+
+            button{
+                height: 30px;
+                font-size: 16px;
+                outline: none;
+                border: none;
+                color: white;
+                font-family: $roboto;
+                background: none;
+                cursor: pointer;
+
+                &:nth-of-type(1){
+                    width: 100px;
+                    background: rgba(3, 191, 248, 0.8);
+                    backdrop-filter: blur(100px);
+                    font-weight: bold;
+                }
+                &:nth-last-of-type(1){
+                    width: 50px;
+                    font-size: 23px;
+                    color: red;
+                }
+
+                &:active{
+                    color: white;
+                    background: black !important;
+                }
+            }
+        }
+
+        .contents{
+            width: 100%;
+            .introduction{
+                width: 100%;
+                color: white;
+                text-align: center;
+                font-family: $roboto;
+                font-weight: normal;
+            }
+            .basics{
+                width: 100%;
+                font-family: $roboto;
+                padding: 10px;
+                gap: 10px;
+                color: white;
+                text-shadow: 0 0 20px #000;
+                table tr td{
+                    padding: 0 10px;
+                    font-size: 13px;
+                }
+                table tr td:nth-last-of-type(1){
+                    text-align: left;
+                }
+                table tr td:nth-of-type(1){
+                    text-align: right;
+                }
+            }
+            .allitems{
+                width: 100%;
+                padding: 20px 40px;
+                table{
+                    width: 100%;
+                    color: white;
+
+                    tr{
+                        &:nth-of-type(1){
+                            td{
+                                font-weight: bold;
+                                font-size: 16px;
+                            }
+                        }
+                        td{
+                            min-width: 200px;
+                            text-align: center;
+                            font-family: $roboto;
+                            font-size: 15px;
+                            padding: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .showing_output_of_orders{
+        width: 450px;
+        max-width: 450px;
+        background: #000;
+        height: 500px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 10px;
+        color: white;
+        padding: 10px;
+        display: none;
+        &.activate{
+            display: block;
+        }
+        h1{
+            padding: 14px;
+            text-align: center;
+            font-family: $roboto;
+            color: rgba(#fff, 0.8);
+            font-size: 24px;
+            display: flex;
+            width: 100%;
+
+            span{
+                width: 100%;
+            }
+
+            button{
+                justify-self: flex-end;
+                padding: 0 10px;
+                font-size: 20px;
+                color: red;
+                text-shadow: 0 0 20px #ccc;
+                background: none;
+                outline: none;
+                border: none;
+                cursor: pointer;
+
+                &:active{
+                    background: red;
+                    color: white;
+                }
+            }
+        }
+
+        .details{
+            p{
+                padding: 5px 10px;
+                font-family: $roboto;
+                font-weight: bold;
+                font-size: 15px;
+                display: flex;
+                span{
+                    font-weight: normal;
+                    padding: 0px 10px;
+                }
+            }
+        }
+
+        .itemlist{
+            padding: 10px;
+            font-family: $roboto;
+            max-height: 250px;
+            height: 250px;
+            overflow: hidden;
+            overflow-y: visible;
+            p{
+                padding: 10px 10px;
+                width: 100%;
+                background: #fff;
+                color: #000;
+                margin: 5px 0;
+            }
+        }
+
+        .buttons{
+            width: 100%;
+            height: 60px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-evenly;
+            gap: 10px;
+            button{
+                width: 100%;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                &:active{
+                    background: #000;
+                    color: white;
+                    cursor: progress;
+                }
+            }
+        }
+    }
+}
+    
+.pending{
+    color: orangered;
+}
+
+.complete{
+    color: green;
+}
+
+.cancel{
+    color: red;
+}
+
+select{
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+/* GENERATED BY SACHIN */
