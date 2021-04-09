@@ -23,4 +23,17 @@ if(isset($_POST['data'])){
     echo "$refno, $finaldate, $total";
 
 }
+
+if(isset($_POST['type'])){
+    $id = $_POST['id'];
+    $quantity = $_POST['quantity'];
+    $rate = $_POST['rate'];
+    $total = $_POST['total'];
+    $productname = $_POST['productname'];
+    $customername = $_POST['customersname'];
+    $address = $_POST['address'];
+    $state = $_POST['states'];
+
+    mysqli_query($conn, "UPDATE `orders` SET `customer`='$customername',`item`='$productname',`quantity`='$quantity',`rate`='$rate',`status`='$state',`address`='$address' WHERE `ID`='$id'");
+}
 ?>

@@ -19,8 +19,23 @@ const closing_windows = (id)=>{
 }
 
 const opening_windows = (id)=>{
-    const getwindow = document.getElementById(id)
-    getwindow.classList.add('activate')
+    const special_context = ['creating_orders', 'viewing-orders']
+    const index = special_context.indexOf(id)
+    if (index === -1){
+        const getwindow = document.getElementById(id)
+        getwindow.classList.add('activate')
+    }else{
+        document.getElementById('editing_content').classList.remove('activate')
+        special_context.forEach(inner =>{
+            if(inner != special_context[index]){
+                const getwindow = document.getElementById(inner)
+                getwindow.classList.remove('activate')
+            }else{
+                const getwindow = document.getElementById(inner)
+                getwindow.classList.add('activate')
+            }
+        })
+    }
 }
 
 count = 1
@@ -78,7 +93,7 @@ const calculateTotal = (param)=>{
     const quantity = quantityItem.querySelector('.itemquantity').value
     const peramount = quantityItem.querySelector('.peramount').value
     const board = quantityItem.querySelector('.total')
-    const total = Math.ceil(quantity * peramount)
+    const total = calculate(quantity, peramount)
     board.textContent = `Total: ${total}/-`
     board.setAttribute('data-total', total)
 }
@@ -90,7 +105,7 @@ const viewMineOrders = (refno)=>{
         const alldatas = data.split(',')
         const customers_name = alldatas[0].split(';')[0]
         const date = alldatas[0].split(';')[6]
-        const address = alldatas[0].split(';')[7] || 'Bharatpur-2, Chitwan'
+        const address = alldatas[0].split(';')[7]
         const showing_output_of_orders = document.getElementById('showing_output_of_orders')
         // Adding main details
         const details_div = showing_output_of_orders.querySelector('.details')
@@ -109,13 +124,14 @@ const viewMineOrders = (refno)=>{
             tager += `
             <p>${selection[1] == null ? 0 : selection[1]} &times; ${selection[2] == null ? 0 : selection[2]} @ ${selection[3] ==null ? 0 : selection[3]}</p>
             `
-            total += selection[2] * selection[3]
+            total += calculate(selection[2], selection[3])
             
         }
         tager += `
             <p class="complete">Total: ${total}/-</p>                
         `
         itemsdetails.innerHTML = tager
+        showing_output_of_orders.querySelector('.buttons .editit').setAttribute('onclick', `editthusout('${refno}')`)
         showing_output_of_orders.classList.add('activate')
     })
 }
@@ -126,4 +142,64 @@ const printout = ()=>{
     document.body.innerHTML = maindiv
     window.print()
     document.body.innerHTML = backup
+}
+
+const editthusout = (refno)=>{
+    // Collecting Output Space
+    const editing_content = document.getElementById('editing_content')
+    const innerDiv = editing_content.querySelector('.innerDiv')
+    $.post('/0/showproducts.php', {
+        update: 'update',
+        bill: refno
+    }, (data, status)=>{
+        closing_windows('showing_output_of_orders')
+        closing_windows('viewing-orders')
+        innerDiv.innerHTML = data
+        editing_content.classList.add('activate')
+    })
+}
+
+const updateContents = ()=>{
+    const mainContainer = document.querySelector('.editing_content')
+    const customersname = mainContainer.querySelector('.details .nameCos .cosname').value
+    const address = mainContainer.querySelector('.details .addrCos .cosaddr').value
+    const allitems = mainContainer.querySelectorAll('.items-editing .items')
+    let total = 0
+    allitems.forEach(minor =>{
+        const productname = minor.querySelector('.item').value
+        const quantity = minor.querySelector('.quantity').value
+        const rate = minor.querySelector('.rate').value
+        const states = minor.querySelector('.status').value
+        if (total === 0){
+            allitems.forEach(mini => {
+                const quan = mini.querySelector('.quantity').value 
+                const rat = mini.querySelector('.rate').value
+                total += calculate(quan, rat)
+            })
+        }
+        $.post('/0/place_order.php', {
+            type: 'type',
+            total,
+            customersname,
+            address,
+            id: minor.getAttribute(['data-id']),
+            quantity,
+            rate,
+            productname,
+            states
+        }, (data, status)=>{
+            minor.remove()
+            //details items-editing
+
+        })
+    })
+
+    mainContainer.querySelector('.details').remove()
+    mainContainer.querySelector('.items-editing').remove()
+    mainContainer.classList.remove('activate')
+    swal("Updated Products", "The Orders has been updated Successfully!", "success");
+}
+
+const calculate = (amount, rate)=>{
+    return amount * rate
 }

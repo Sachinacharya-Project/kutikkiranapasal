@@ -100,25 +100,33 @@ $(document).ready(()=>{
     //Buttons
     const view_order = document.getElementById('view-orders')
     // Divinsion
-    const viewing_orders = document.getElementById('viewing-orders')
+    const viewing_orders = document.querySelector('.viewing-orders .details')
     // Events
     view_order.addEventListener('click', ()=>{
         $.post('/0/showproducts.php', 
         {
             get:'get'
         }, (data, status)=>{
-            const alldatasseparated = data.split(',')
-            for (let i = 0;i<alldatasseparated.length - 1;i++){
-                const maindata = alldatasseparated[i].split(';')
-                viewing_orders.innerHTML += `
-                <li onclick="viewMineOrders('${maindata[0]}')">
-                <p>Name: ${maindata[1]}</p>
-                <p>Order On: ${maindata[2]}</p>
-                <p>Total: RS ${maindata[3]}/-</p>
-                </li>
-                `
-            }
+            viewing_orders.innerHTML = data
         })
     })
+
+    const live_search_bar = document.getElementById('search-bar')
+    live_search_bar.onkeyup = ()=>{
+        const search_data = live_search_bar.value
+        if(search_data != ''){
+            $.post('/0/showproducts.php', {
+                get:search_data
+            }, (data, status)=>{
+                viewing_orders.innerHTML = data
+            })
+        }else{
+            $.post('/0/showproducts.php', {
+                get:'get'
+            }, (data, status)=>{
+                viewing_orders.innerHTML = data
+            })
+        }
+    }
     
 })
