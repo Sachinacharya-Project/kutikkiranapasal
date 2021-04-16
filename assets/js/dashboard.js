@@ -19,10 +19,7 @@ const menu_this = (arg)=>{
         }
     })
 }
-const gettingallproducts = ()=>{
-    products = [['Ghee', '12 ltr'], ['Water', '12 ltr']]
-    return products
-}
+
 const closing_windows = (id)=>{
     console.log(id);
     const getwindow = document.getElementById(id)
@@ -36,6 +33,9 @@ const opening_windows = (id)=>{
         const getwindow = document.getElementById(id)
         getwindow.classList.add('activate')
     }else{
+        if(special_context[index] === 'creating_orders'){
+            show_selected()
+        }
         document.getElementById('editing_content').classList.remove('activate')
         special_context.forEach(inner =>{
             if(inner != special_context[index]){
@@ -62,14 +62,11 @@ const add_product = ()=>{
     itemname.name = 'itemname'
     itemname.classList.add('itemname')
     itemdiv.appendChild(itemname)
-    const prod = gettingallproducts()
-    console.log(prod);
-    let opts = `<option value="null">Choose Product</option>`
-    prod.forEach(small_prod => {
-        const name = small_prod[0].toLowerCase()
-        opts += `<option value='${name}'>${small_prod[0]}(${small_prod[1]})</option>`
+    $.post('/0/place_order.php', {
+        productlist: 'all'
+    }, (data, status)=>{
+        itemname.innerHTML = data;
     })
-    itemname.innerHTML = opts;
     const itemquantity = document.createElement('input')
     itemquantity.type = 'text'
     itemquantity.name = 'itemquantity'
@@ -452,3 +449,20 @@ const showprod = ()=>{
         showing_products.innerHTML = data;
     })
 }
+
+const show_selected = ()=>{
+    const creating_orders = document.querySelector('.creating_orders .items-details .items select')
+    $.post('/0/place_order.php', {
+        productlist: 'all'
+    }, (data, status)=>{
+        creating_orders.innerHTML = data;
+    })
+}
+
+const of_transactions_select = document.querySelector('.of_transactions .options select')
+of_transactions_select.addEventListener('change', ()=>{
+    value = of_transactions_select.value
+    $.post('/0/showproducts.php', {
+        value
+    })
+})

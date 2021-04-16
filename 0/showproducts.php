@@ -7,7 +7,6 @@ if(isset($_POST['refno'])){
         echo "$rows[1];$rows[2];$rows[3];$rows[4];$rows[5];$rows[6];$rows[7];$rows[8],";
     }
 }
-
 if(isset($_POST['get'])){
     $posted = $_POST['get'];
     if($posted == 'get'){
@@ -116,7 +115,6 @@ if(isset($_POST['get'])){
         echo $output;
     }
 }
- 
 if(isset($_POST['ask'])){
     $refno = $_POST['ref'];
     $index = $_POST['id'];
@@ -141,7 +139,6 @@ if(isset($_POST['ask'])){
         echo $output;
     }
 }
-
 if(isset($_POST['update'])){
     $refno = $_POST['bill'];
     $query = mysqli_query($conn, "SELECT * FROM `orders` WHERE `ref`='$refno'");

@@ -73,13 +73,27 @@ $rows = mysqli_fetch_assoc($results)
                         </div>
                     </div>
                 </div>
-                <div class="of_transactions allboards">
+                <div class="of_transactions allboards opendiv">
                     <div class="history">
                         <div class="total"><h1>Total Transactions: Rs 20,000</h1></div>
                         <div class="left"><h1>Debit: Rs 2,000</h1></div>
                         <div class="lend"><h1>Credit: Rs 1,000</h1></div>
                     </div>
                     <div class="options">
+                        <select>
+                            <option value="all">Show All</option>
+                            <option value="debit">Debit</option>
+                            <option value="credit">Credit</option>
+                        </select>
+                        <div class="output">
+                            <li>
+                                <p><span>Name: </span>Sachin Acharya</p>
+                                <p><span>Last Transaction: </span>2019-01-10 12:12:21 AM</p>
+                                <p><span>Address: </span>Bharatpur-2, Chitwan</p>
+                                <p><span>Amount: </span>1200/-</p>
+                                <p><span>Total Transaction: </span>120000</p>
+                            </li>
+                        </div>
                     </div>
                 </div>
                 <div class="of_orders allboards">
@@ -102,10 +116,6 @@ $rows = mysqli_fetch_assoc($results)
                         <div class="items-details" id="items-details">
                             <div class="items" id="1">
                                 <select name="itemname" class="itemname">
-                                    <option value="null">Choose Product</option>
-                                    <option value="ghee">Ghee (12 ltr)</option>
-                                    <option value="water">Water (200 ltr)</option>
-                                    <option value="red bull">Red Bull (12 General)</option>
                                 </select>
                                 <input type="text" data-parent='1' name="itemquantity" id="itemquantity" class="itemquantity" required="required" placeholder="Quantity" onkeyup="calculateTotal('1')">
                                 <input type="text" data-parent='1' name="peramount" id="peramount" class="peramount" required="required" placeholder="Rate" onkeyup="calculateTotal('1')">
@@ -187,7 +197,7 @@ $rows = mysqli_fetch_assoc($results)
                         </div>
                     </div>
                 </div>
-                <div class="of_inventory allboards opendiv">
+                <div class="of_inventory allboards">
                     <div class="controllers">
                         <select>
                             <option value="making_purchase">Show Options</option>

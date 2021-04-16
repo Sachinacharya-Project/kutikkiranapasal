@@ -91,6 +91,8 @@ if(isset($_POST['shopname'])){
         $rate = $data[2];
         $quantity = $data[3];
         $thistotal = $data[4];
+        $arra = [[$productname, $quantity]];
+        update_orders($conn, $arra);
         $query = "INSERT INTO `purchases` (`ID`, `ref`, `name`, `address`, `product`, `unit`, `rate`, `quantity`, `orderdate`, `ispaid`, `isdelivered`, `payment_by`, `selftotal`, `total`, `iscompleted`, `extra`) VALUES (NULL, '$refno', '$shopname', '$shopaddress', '$productname', '$unit', '$rate', '$quantity', '$orderdate', '$ispaid', '$isdelivered', '$payment_type', '$thistotal', '$total', '$icon', '$account')";
         $sql = mysqli_query($conn, $query);
         $output .= "
@@ -109,6 +111,7 @@ if(isset($_POST['shopname'])){
         <button onclick=closing_windows('data_lockdown')>Okay!</button>
     </div>
     ";
+    mysqli_query($conn, "INSERT INTO `transactions`(`refno`, `trans_type`) VALUES('$refno', 'purchases')");
     echo $output;
 }
 if(isset($_POST['show'])){
@@ -171,24 +174,7 @@ if(isset($_POST['show'])){
 }
 if(isset($_POST['type'])){
     $myarray = $_POST['myarray'];
-    $results = '';
-    foreach($myarray as $arr){
-        $prodname = $arr[0];
-        $quantity = $arr[1];
-        $query = mysqli_query($conn, "SELECT * FROM `products` WHERE name='$prodname'");
-        $lenght = mysqli_num_rows($query);
-        $rows = mysqli_fetch_array($query);
-        if($lenght > 0){
-            $newQuan = intval($rows[2]) + intval($quantity);
-            mysqli_query($conn, "UPDATE `products` SET `quantity`='$newQuan' WHERE name='$prodname'");
-            $results .= "Product $prodname is Updated by $newQuan Quantity inStock\n";
-        }else{
-            mysqli_query($conn, "INSERT INTO `products`(`name`, `quantity`) VALUES ('$prodname', '$quantity')");
-            $results .= "$prodname Has been added as new Product\n";
-        }
-    }
-
-    echo $results;
+    echo update_orders($conn, $myarray);
 }
 if(isset($_POST['showprod'])){
     $query = mysqli_query($conn, "SELECT * FROM `products` ORDER BY `quantity` ASC");
