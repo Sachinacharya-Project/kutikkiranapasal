@@ -202,61 +202,14 @@
 }
 
 .allboards {
-  display: block;
+  display: none;
   width: 100%;
   height: 100%;
   padding: 20px;
 }
 
-.allboards.of_dashboard, .allboards.of_transactions {
-  display: none;
-}
-
-.allboards.of_dashboard.opendiv, .allboards.of_transactions.opendiv {
+.allboards.opendiv {
   display: block;
-}
-
-.allboards .summary {
-  width: 100%;
-  height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-}
-
-.allboards .summary div {
-  height: 200px;
-  width: 200px;
-  text-align: center;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.2);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.allboards .summary div i {
-  font-size: 110px;
-  color: white;
-}
-
-.allboards .summary div h1 {
-  color: black;
-  font-family: "Roboto", sans-serif;
-  font-weight: bold;
-  padding: 0 0 10px 0;
-}
-
-.allboards .summary div p {
-  font-family: "Roboto", sans-serif;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 16px;
 }
 
 .allboards .newcustomers {
@@ -280,38 +233,6 @@
   color: black;
   font-family: "Roboto", sans-serif;
   font-weight: bold;
-}
-
-.allboards .history {
-  width: 100%;
-  padding: 10px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  color: white;
-  font-family: "Roboto", sans-serif;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  background: rgba(255, 255, 255, 0.3);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-}
-
-.allboards .history div {
-  padding: 1px;
-}
-
-.allboards .history div h1 {
-  font-size: 17px;
-  font-weight: normal;
-}
-
-.allboards .history div:nth-last-child(1) h1 {
-  color: orangered;
-  font-weight: bold;
-  text-shadow: 0 0 20px #000;
 }
 
 .allboards .topmemenus {
@@ -942,6 +863,660 @@
   outline: none;
   font-family: "Roboto", sans-serif;
   cursor: pointer;
+}
+
+.of_inventory {
+  height: 100%;
+  width: 100%;
+}
+
+.of_inventory .controllers {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 5px;
+}
+
+.of_inventory .controllers select {
+  width: 100%;
+  background: #07ada0;
+  color: white;
+}
+
+.of_inventory .allcontainers {
+  max-width: 400px;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 5px;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.of_inventory .allcontainers h1 {
+  width: 100%;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: "Roboto", sans-serif;
+  padding: 10px 0;
+}
+
+.of_inventory .allcontainers .making-purchase {
+  padding: 10px;
+  display: none;
+}
+
+.of_inventory .allcontainers .making-purchase.activate {
+  display: block;
+}
+
+.of_inventory .allcontainers .making-purchase .shopkeeperdetails {
+  padding: 0px 5px;
+  font-family: "Roboto", sans-serif;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+}
+
+.of_inventory .allcontainers .making-purchase .shopkeeperdetails select {
+  width: 100%;
+  padding: 5px;
+  height: 35px;
+  font-size: 14px;
+  color: white;
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+
+.of_inventory .allcontainers .making-purchase .shopkeeperdetails select option {
+  background: #0495a8;
+  padding: 5px;
+}
+
+.of_inventory .allcontainers .making-purchase .shopkeeperdetails label {
+  padding: 10px 0;
+  font-size: 15px;
+}
+
+.of_inventory .allcontainers .making-purchase .shopkeeperdetails label, .of_inventory .allcontainers .making-purchase .shopkeeperdetails input {
+  display: block;
+  color: white;
+}
+
+.of_inventory .allcontainers .making-purchase .shopkeeperdetails input {
+  width: 100%;
+  padding: 5px;
+  border: none;
+  outline: none;
+  color: black;
+  font-size: 15px;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
+
+.of_inventory .allcontainers .viewing_purchases {
+  width: 100%;
+  display: none;
+  padding: 10px;
+}
+
+.of_inventory .allcontainers .viewing_purchases.activate {
+  display: block;
+}
+
+.of_inventory .allcontainers .viewing_purchases .buttons {
+  padding: 0px 10px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  gap: 10px;
+}
+
+.of_inventory .allcontainers .viewing_purchases .buttons select {
+  max-width: 220px;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+  background: rgba(0, 189, 148, 0.815);
+  color: white;
+  letter-spacing: 0px;
+  height: 35px;
+}
+
+.of_inventory .allcontainers .viewing_purchases .buttons button {
+  max-width: 130px;
+  width: 100%;
+  cursor: pointer;
+  height: 35px;
+}
+
+.of_inventory .allcontainers .viewing_purchases .containers {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  overflow: hidden;
+  overflow-y: visible;
+  height: 340px;
+  padding: 10px;
+}
+
+.of_inventory .allcontainers .viewing_purchases .containers li {
+  list-style: none;
+  background: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  -webkit-transition: 0.3s all linear;
+  transition: 0.3s all linear;
+}
+
+.of_inventory .allcontainers .viewing_purchases .containers li:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.of_inventory .allcontainers .viewing_purchases .containers li.com {
+  background: rgba(0, 128, 0, 0.2);
+}
+
+.of_inventory .allcontainers .viewing_purchases .containers li.pend {
+  background: rgba(255, 0, 0, 0.2);
+}
+
+.of_inventory .allcontainers .viewing_purchases .containers li.semi {
+  background: rgba(255, 69, 0, 0.2);
+}
+
+.of_inventory .allcontainers .button {
+  width: 100%;
+  padding: 5px 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.of_inventory .allcontainers .button button {
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border: none;
+  outline: none;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.of_inventory .allcontainers .button button:active {
+  background: black;
+  color: white;
+  cursor: progress;
+}
+
+.of_inventory .allcontainers .button button.act {
+  background: green;
+}
+
+.of_inventory .allcontainers .purchasing-items {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  overflow-y: visible;
+  scroll-behavior: smooth;
+  -ms-scroll-snap-type: mandatory;
+      scroll-snap-type: mandatory;
+}
+
+.of_inventory .allcontainers .purchasing-items .items {
+  padding: 10px 5px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+}
+
+.of_inventory .allcontainers .purchasing-items .items input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 10px;
+}
+
+.of_inventory .allcontainers .purchasing-items .items p {
+  width: 100%;
+  padding: 5px;
+  color: white;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+}
+
+.of_inventory .allcontainers .purchase-btn {
+  width: 100%;
+}
+
+.of_inventory .allcontainers .purchase-btn input {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.of_inventory .allcontainers .purchase-btn input:active {
+  background: black;
+  color: white;
+  cursor: progress;
+}
+
+.of_inventory .allcontainers .adding_products {
+  width: 100%;
+  padding: 10px;
+  display: none;
+}
+
+.of_inventory .allcontainers .adding_products.activate {
+  display: block;
+}
+
+.of_inventory .allcontainers .adding_products .details {
+  height: 90px;
+  overflow: hidden;
+  overflow-y: visible;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+}
+
+.of_inventory .allcontainers .adding_products .details .items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.of_inventory .allcontainers .adding_products .details .items p {
+  width: 100%;
+}
+
+.of_inventory .allcontainers .adding_products .details .items p input {
+  padding: 6px;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+}
+
+.of_inventory .allcontainers .adding_products .buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  gap: 10px;
+  padding: 10px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.of_inventory .allcontainers .adding_products .buttons button {
+  width: 100%;
+  padding: 8px;
+  outline: none;
+  border: none;
+  color: white;
+  background: rgba(255, 255, 255, 0.3);
+  font-family: "Roboto", sans-serif;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  display: block;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.of_inventory .allcontainers .adding_products .buttons button:active {
+  background: #000;
+  color: white;
+}
+
+.of_inventory .allcontainers .showing_products {
+  width: 100%;
+  padding: 10px;
+  display: none;
+  gap: 10px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.of_inventory .allcontainers .showing_products.activate {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.of_inventory .allcontainers .showing_products .details {
+  max-height: 200px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: hidden;
+  overflow-y: visible;
+}
+
+.of_inventory .allcontainers .showing_products li {
+  list-style: none;
+  padding: 10px;
+  width: 100%;
+  display: block;
+  font-family: "Roboto", sans-serif;
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.of_inventory .allcontainers .showing_products li.out {
+  background: rgba(255, 0, 0, 0.2);
+}
+
+.of_inventory .allcontainers .showing_products li.almost {
+  background: rgba(0, 128, 0, 0.2);
+}
+
+.of_inventory .showing-container {
+  border-radius: 5px;
+  display: none;
+  max-width: 400px;
+  background: rgba(0, 175, 175, 0.6);
+  -webkit-backdrop-filter: blur(30px);
+          backdrop-filter: blur(30px);
+  width: 100%;
+  min-height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  padding: 15px 15px;
+  color: white;
+  text-shadow: 0 0 20px #333;
+  -webkit-box-shadow: 0 0 25px #333;
+          box-shadow: 0 0 25px #333;
+}
+
+.of_inventory .showing-container.activate {
+  display: block;
+}
+
+.of_inventory .showing-container h1 {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: "Roboto", sans-serif;
+}
+
+.of_inventory .showing-container .main_details {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+}
+
+.of_inventory .showing-container .main_details p {
+  padding: 5px;
+}
+
+.of_inventory .showing-container .main_details p span {
+  font-weight: bold;
+}
+
+.of_inventory .showing-container .interm_items {
+  width: 100%;
+  list-style: none;
+  height: 160px;
+  overflow: hidden;
+  overflow-y: visible;
+}
+
+.of_inventory .showing-container .interm_items li {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  font-family: "Roboto", sans-serif;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.of_inventory .showing-container .interm_items li p {
+  padding: 3px;
+}
+
+.of_inventory .showing-container .interm_items li span {
+  font-weight: bold;
+}
+
+.of_inventory .showing-container .closing_this {
+  width: 100%;
+  padding: 10px 0;
+}
+
+.of_inventory .showing-container .closing_this button {
+  width: 100%;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  color: white;
+  font-family: "Roboto", sans-serif;
+  height: 35px;
+  border-radius: 5px;
+}
+
+.of_inventory .showing-container .closing_this button:active {
+  background: black;
+  color: white;
+}
+
+.of_transactions .history {
+  width: 100%;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+
+.of_transactions .history div {
+  padding: 1px;
+}
+
+.of_transactions .history div h1 {
+  font-size: 17px;
+  font-weight: normal;
+}
+
+.of_transactions .history div:nth-last-child(1) h1 {
+  color: orangered;
+  font-weight: bold;
+  text-shadow: 0 0 20px #000;
+}
+
+.of_dashboard {
+  height: 100%;
+  width: 100%;
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  overflow: hidden;
+  overflow-y: visible;
+}
+
+.of_dashboard.opendiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.of_dashboard .analytics {
+  height: 100%;
+  width: 100%;
+  background: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.of_dashboard .analytics .container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.of_dashboard .analytics .container h1 {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.8);
+  font-family: "Roboto", sans-serif;
+  padding: 10px;
+  font-size: 26px;
+}
+
+.of_dashboard .analytics .container #curve_chart {
+  padding: 0 10px;
+  margin-top: 10px;
+}
+
+.of_dashboard .analytics .container .stat {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 20px;
+  color: #000;
+  height: 250px;
+  overflow-y: visible;
+  overflow: hidden;
+}
+
+.of_dashboard .analytics .container .stat h1 {
+  font-family: "Roboto", sans-serif;
+  font-size: 26px;
+  text-align: center;
+  padding: 10px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.of_dashboard .analytics .container .stat table {
+  width: 100%;
+  max-width: 500px;
+}
+
+.of_dashboard .analytics .container .stat table tr:nth-of-type(1) td {
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.of_dashboard .analytics .container .stat table td {
+  color: black;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  padding: 10px 0;
 }
 
 .pending {

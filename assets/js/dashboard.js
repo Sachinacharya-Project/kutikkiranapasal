@@ -1,19 +1,30 @@
-// const all_options = document.querySelectorAll('.options');
-// console.log(all_options);
-// all_options.forEach(options => {
-//     options.addEventListener('click', ()=>{
-//         if(!options.classList.contains('active')){
-//             const classname = options.getAttribute(['data-class'])
-//             document.querySelector(`.${classname}`).classList.add('open')
-//             all_options.forEach(opt=>{
-//                 opt.classList.remove('sectionactive')
-//             })
-//             options.classList.add('sectionactive')
-//         }
-//     })
-// })
-
+const menu_this = (arg)=>{
+    const optmenu = document.querySelectorAll('.optmenu')
+    const mainer_heading = document.querySelector('.mainer_heading')
+    const text = arg.textContent
+    mainer_heading.textContent = text
+    optmenu.forEach(menu => {
+        if(menu.textContent === text){
+            if(!menu.classList.contains('sectionactive')){
+                menu.classList.add('sectionactive')
+            }
+            const of_div = document.querySelector(`.${menu.getAttribute(['data-class'])}`)
+            if(!of_div.classList.contains('opendiv')){
+                of_div.classList.add('opendiv')
+            }
+        }else{
+            menu.classList.remove('sectionactive')
+            const of_div = document.querySelector(`.${menu.getAttribute(['data-class'])}`)
+            of_div.classList.remove('opendiv')
+        }
+    })
+}
+const gettingallproducts = ()=>{
+    products = [['Ghee', '12 ltr'], ['Water', '12 ltr']]
+    return products
+}
 const closing_windows = (id)=>{
+    console.log(id);
     const getwindow = document.getElementById(id)
     getwindow.classList.remove('activate')
 }
@@ -47,15 +58,18 @@ const add_product = ()=>{
     itemdiv.id = count;
     container.appendChild(itemdiv)
 
-    const itemname = document.createElement('input')
-    itemname.type = 'text'
+    const itemname = document.createElement('select')
     itemname.name = 'itemname'
     itemname.classList.add('itemname')
-    itemname.setAttribute('required', 'required')
-    itemname.setAttribute('placeholder', 'Product Name')
-    itemname.setAttribute('autocomplete', 'off')
     itemdiv.appendChild(itemname)
-
+    const prod = gettingallproducts()
+    console.log(prod);
+    let opts = `<option value="null">Choose Product</option>`
+    prod.forEach(small_prod => {
+        const name = small_prod[0].toLowerCase()
+        opts += `<option value='${name}'>${small_prod[0]}(${small_prod[1]})</option>`
+    })
+    itemname.innerHTML = opts;
     const itemquantity = document.createElement('input')
     itemquantity.type = 'text'
     itemquantity.name = 'itemquantity'
@@ -200,6 +214,241 @@ const updateContents = ()=>{
     swal("Updated Products", "The Orders has been updated Successfully!", "success");
 }
 
+loading_counter = 2
+const create_new_tab = ()=>{
+    const main_container = document.querySelector('.of_inventory .allcontainers .purchasing-items')
+    const inner_button = document.querySelector('.of_inventory .allcontainers .button button')
+    
+    standard_div = document.createElement('div')
+    standard_div.classList.add('items')
+    standard_div.setAttribute('data-index', loading_counter)
+    main_container.appendChild(standard_div)
+
+    const input = document.createElement('input')
+    input.classList.add('item-name')
+    input.setAttribute('required', 'required')
+    input.setAttribute('autocomplete', 'off')
+    input.placeholder = `${loading_counter} Product Name`
+    standard_div.appendChild(input)
+
+    const unit = document.createElement('select')
+    unit.classList.add('unit')
+    standard_div.appendChild(unit)
+    unit.innerHTML = `
+    <option value="regular">General (eg. 1 Biscuit)</option>
+    <option value="kilo">Kilo</option>
+    <option value="litre">Litre</option>
+    <option value="dozan">Dozan</option>
+    `
+    const quantity = document.createElement('input')
+    quantity.classList.add('quantity')
+    quantity.placeholder = 'Quantity'
+    quantity.setAttribute('required', 'required')
+    quantity.setAttribute('onkeyup', `update_total(${loading_counter})`)
+    quantity.autocomplete = 'off'
+    standard_div.appendChild(quantity)
+    
+    const rate = document.createElement('input')
+    rate.classList.add('rate')
+    rate.placeholder = 'Rate'
+    rate.setAttribute('required', 'required')
+    rate.autocomplete = 'off'
+    rate.setAttribute('onkeyup', `update_total("${loading_counter}")`)
+    standard_div.appendChild(rate)
+
+    const main_total = document.createElement('p')
+    main_total.classList.add('total')
+    main_total.textContent = 'Total: 0/-'
+    standard_div.appendChild(main_total)
+
+    inner_button.textContent = 'New Product Added'
+    inner_button.classList.add('act')
+    setTimeout(()=>{
+        inner_button.textContent = `Add Product (${loading_counter-1} + 1)`
+        inner_button.classList.remove('act')
+    }, 200)
+    loading_counter++;
+}
+
 const calculate = (amount, rate)=>{
     return amount * rate
+}
+
+const closer_look = (id)=>{
+    const ids = ['viewing_purchases', 'making_purchase', 'adding_products', 'showing_products']
+    ids.forEach(simps => {
+        if(simps === id){
+            document.getElementById(simps).classList.add('activate')
+        }else{
+            document.getElementById(simps).classList.remove('activate')
+        }
+    })
+    if(id === 'showing_products'){
+        showprod();
+    }
+}
+
+const data_view = ()=>{
+    const typed = document.getElementById('filtering_this_item').value
+    const output_area = document.querySelector(".allcontainers .viewing_purchases .containers")
+    $.post('/0/inventory.php', {
+        typed,
+    }, (data, status)=>{
+        output_area.innerHTML = data;
+        console.log(status);
+    })
+}
+
+const show = (ref_no)=>{
+    const showing_container = document.getElementById('data_lockdown')
+    $.post('/0/inventory.php', {
+        show: ref_no
+    }, (data, status)=>{
+        showing_container.innerHTML = data;
+        closing_windows('viewing_purchases');
+        showing_container.classList.add('activate')
+    })
+}
+
+
+const make_purchase_please = ()=>{
+    const main_container = document.getElementById('making_purchase')
+    /* Collecting Static Datas */
+    const shopname = main_container.querySelector('.shopkeeperdetails p .shopname').value
+    const shopaddress = main_container.querySelector('.shopkeeperdetails p .shopaddr').value
+    const payment_type = main_container.querySelector('.shopkeeperdetails p .payment_type').value
+    const ispaid = main_container.querySelector('.shopkeeperdetails p .ispaid').value
+    const isdelivered = main_container.querySelector('.shopkeeperdetails p .isDelivered').value
+    let account;
+    if (payment_type === 'Bank Transfer'){
+        account = prompt('Account Number (Receiver)')
+    }else if(payment_type == 'Others'){
+        account = prompt('Please Specify Payment Method')
+    }
+    else{
+        account = ''
+    }
+    const inner_items = main_container.querySelectorAll('.purchasing-items .items')
+    let total = 0
+    const datas = []
+    const date = new Date()
+    // Calender
+    const years = date.getUTCFullYear()
+    let months = date.getUTCMonth() + 1
+    months = months < 10 ? '0'+months : months
+    let day = date.getUTCDate()
+    day = day < 10 ? '0'+day : day
+    // Time
+    const hours = date.getHours()
+    let minutes = date.getMinutes()
+    minutes = minutes<10 ? '0'+minutes : minutes
+    const finalDate = years+'/'+months+'/'+day+' '+hours+':'+minutes;
+    inner_items.forEach(minor_items => {
+        const side_data = []
+        const itemname = minor_items.querySelector(".item-name").value
+        const unit = minor_items.querySelector(".unit").value
+        const rate = minor_items.querySelector('.rate').value
+        const quantity = minor_items.querySelector('.quantity').value
+        const tots = calculate(quantity, rate)
+        total += tots
+        side_data.push(itemname, unit, rate, quantity, tots)
+        datas.push(side_data)
+    })
+    $.post('/0/inventory.php', {
+        shopname,
+        shopaddress,
+        ispaid,
+        isdelivered,
+        payment_type,
+        account,
+        finalDate,
+        total,
+        constdata: datas
+    }, (data, status)=>{
+        console.log(data);
+        inner_items.forEach(m => {
+            if(m.getAttribute(['data-index']) != '1'){
+                m.remove()
+            }else{
+                m.querySelector(".item-name").value = null;
+                m.querySelector(".quantity").value = null;
+                m.querySelector(".rate").value = null;
+                m.querySelector(".total").textContent = 'Total: 0/-';
+            }
+        })
+        const showing_container = document.getElementById('data_lockdown')
+        main_container.classList.remove('activate')
+        showing_container.innerHTML = data;
+        showing_container.classList.add('activate');
+        swal(`You Have Total Expenditure of Rs ${total}/-`)
+    })
+}
+
+const update_total = (index)=>{
+    const main_container = document.querySelectorAll('.of_inventory .allcontainers .purchasing-items .items')
+    const quantity = main_container[index-1].querySelector('.quantity').value
+    const rate = main_container[index-1].querySelector('.rate').value
+    const total_div = main_container[index-1].querySelector('.total')
+    const total = calculate(quantity, rate)
+    total_div.textContent = `Total: ${total}/-`
+}
+
+let prodcout = 2
+const create_add_product = ()=>{
+    const main_container = document.querySelector('.adding_products .innerHtml .details')
+    const templete = `
+    <div class="items">
+        <p>
+            <input type="text" class="prodname" placeholder="${prodcout} Product Name" required="required" autocomplete="none">
+        </p>
+        <p>
+            <input type="text" class="instock" placeholder="Quantity InStock" required="required" autocomplete="none">
+        </p>
+    </div>
+    `;
+    main_container.insertAdjacentHTML('afterbegin', templete)
+    prodcout++;
+}
+
+const save_product = (args)=>{
+    if(args == 'saving'){
+        const myarray = [];
+        const datas_stream = document.querySelectorAll('.adding_products .details .items')
+        datas_stream.forEach(item => {
+            const prdname = item.querySelector('.prodname').value
+            const instock = item.querySelector('.instock').value
+            if(prdname != null || instock != null){
+                const newA = [prdname, instock]
+                myarray.push(newA)
+            }
+        })
+        $.post('/0/inventory.php', {
+            type: 'saving',
+            myarray
+        }, (data, status)=>{
+            swal(data)
+            datas_stream.forEach(i => {
+                if(!i.classList.contains('items_one')){
+                    i.remove()
+                }else{
+                    i.querySelector('.prodname').value = ''
+                    i.querySelector('.instock').value = ''
+                }
+            })
+        })
+    }
+}
+
+const of_inventory_select = document.querySelector(".of_inventory .controllers select")
+of_inventory_select.addEventListener('change', ()=>{
+    closer_look(of_inventory_select.value)
+})
+const showprod = ()=>{
+    $.post('/0/inventory.php', {
+        showprod: 'show'
+    }, (data, status)=>{
+        const showing_products = document.querySelector('.showing_products .details')
+        console.log(data);
+        showing_products.innerHTML = data;
+    })
 }
