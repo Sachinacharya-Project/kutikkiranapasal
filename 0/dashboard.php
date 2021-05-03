@@ -35,10 +35,11 @@ $rows = mysqli_fetch_assoc($results)
                 </div>
             </div>
             <div class="links">
-                <li class="options sectionactive optmenu" data-class='of_dashboard' onclick='menu_this(this)'><i class="fas fa-tachometer-alt"></i> Dashboard</li>
+                <li class="options optmenu" data-class='of_dashboard' onclick='menu_this(this)'><i class="fas fa-tachometer-alt"></i> Dashboard</li>
                 <li class='options optmenu' data-class="of_transactions" onclick='menu_this(this)'><i class="fas fa-money-check-alt"></i> Transactions</li>
                 <li class="options optmenu" data-class="of_inventory" onclick='menu_this(this)'><i class="fas fa-warehouse"></i> Inventory</li>
                 <li class="options optmenu" data-class="of_orders" onclick='menu_this(this)'><i class="fas fa-sort-numeric-up-alt"></i> Orders</li>
+                <li class="options optmenu sectionactive" data-class="of_customers" onclick='menu_this(this)'><i class="fas fa-sort-numeric-up-alt"></i> Customers</li>
             </div>
         </div>
         <div class="right_parts">
@@ -73,30 +74,22 @@ $rows = mysqli_fetch_assoc($results)
                         </div>
                     </div>
                 </div>
-                <div class="of_transactions allboards opendiv">
+                <div class="of_transactions allboards">
                     <div class="history">
-                        <div class="total"><h1>Total Transactions: Rs 20,000</h1></div>
-                        <div class="left"><h1>Debit: Rs 2,000</h1></div>
-                        <div class="lend"><h1>Credit: Rs 1,000</h1></div>
+                        
                     </div>
                     <div class="options">
                         <select>
+                            <option value="null">Choose Options</option>
                             <option value="all">Show All</option>
                             <option value="debit">Debit</option>
                             <option value="credit">Credit</option>
                         </select>
                         <div class="output">
-                            <li>
-                                <p><span>Name: </span>Sachin Acharya</p>
-                                <p><span>Last Transaction: </span>2019-01-10 12:12:21 AM</p>
-                                <p><span>Address: </span>Bharatpur-2, Chitwan</p>
-                                <p><span>Amount: </span>1200/-</p>
-                                <p><span>Total Transaction: </span>120000</p>
-                            </li>
                         </div>
                     </div>
                 </div>
-                <div class="of_orders allboards">
+                <div class="of_orders allboards opendiv">
                     <div class="topmemenus">
                         <h1>Choose: </h1>
                         <button class="create-orders" id='create-orders' onclick="opening_windows('creating_orders')">Create Order</button>
@@ -105,14 +98,19 @@ $rows = mysqli_fetch_assoc($results)
                     <div class="creating_orders" id="creating_orders">
                         <h1><span>Order Placement</span> <button class="closethis" onclick="closing_windows('creating_orders')"><i class="fas fa-times"></i></button></h1>
                         <div class="customers-name" id="customers_name">
+                            
                             <label for="customersName"><i class="fas fa-user"></i> Customers Name</label>
-                            <input type="text" name="customersName" id="customersName" class="customersName" autocomplete="false" required>
-                            <label for="customersName"><i class="fas fa-map-marker-alt"></i> Address</label>
+                            <input type="text" name="customersName" id="customersName" class="customersName customersNameLive" autocomplete="geda_bhyo_jindagi" required>
+                            <p class="all_the_customer">
+                            </p>
+                            <label for="customersaddress"><i class="fas fa-map-marker-alt"></i> Address</label>
                             <input type="text" name="customersaddress" id="customersaddress" class="customersaddress" value='Bharatpur-2, Chitwan' autocomplete="false" required>
-
+                            
+                            <label for="asking_amount">Amount Received</label>
+                            <input type="text" name="asking_amount" id="asking_amount" class="asking_amount" value='0' autocomplete="false" required>
+                            
                             <button id="add_prod">Add More Product</button>
                         </div>
-                        <!-- <hr> -->
                         <div class="items-details" id="items-details">
                             <div class="items" id="1">
                                 <select name="itemname" class="itemname">
@@ -180,20 +178,36 @@ $rows = mysqli_fetch_assoc($results)
                                         <td class="res-checkdate"></td>
                                     </tr>
                                     <tr>
-                                        <td>Total Amount</td>
+                                        <td>Total Received Amount</td>
                                         <td class="res-total"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Cost</td>
+                                        <td class="res-actual-cost"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Debit/Credit</td>
+                                        <td class="res-debit-credit"></td>
                                     </tr>
                                 </table>
 
                             </div>
                             <div class="allitems">
-                                <table></table>
+                                <table>
+                                    <tr>
+                                        <td>Items</td>
+                                        <td>Quantity</td>
+                                        <td>Rate</td>
+                                        <td>Cost</td>
+                                        <td>Status</td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
                     <div class="editing_content" id="editing_content">
                         <div class="innerDiv">
-                            Hel
+                            
                         </div>
                     </div>
                 </div>
@@ -209,7 +223,7 @@ $rows = mysqli_fetch_assoc($results)
                         <!-- <p><button class="make_purchase" onclick="closer_look('making_purchase')">Make Purchase</button> <button class="show_purchases" onclick="closer_look('viewing_purchases')">Show Purchases</button> <button class='add_products' onclick="closer_look('adding_products')">Add Product</button></p> -->
                     </div>
                     <div class="allcontainers">
-                        <div class="making-purchase activate" id="making_purchase">
+                        <div class="making-purchase" id="making_purchase">
                             <h1>Make Purchase</h1>
                             <div class="shopkeeperdetails">
                                 <p>
@@ -219,9 +233,6 @@ $rows = mysqli_fetch_assoc($results)
                                     <input type="text" name="shopaddr" id="shopaddr" class="shopaddr" autocomplete="off" required="required" placeholder="Shop Address"> 
                                 </p>
                                 <p>
-                                    <!--
-                                         onclick="check_items(this)"
-                                    -->
                                     <select class="payment_type" id="payment_type">
                                         <option value="Cheque">Choose Payment Method</option>
                                         <option value="Cheque">Cheque</option>
@@ -232,17 +243,20 @@ $rows = mysqli_fetch_assoc($results)
                                 </p>
                                 <p>
                                     <select class="ispaid">
-                                        <option value="yes">Have you paid, Already?</option>
+                                        <option value="yes">Have you paid, Already? (yes)</option>
                                         <option value="yes">Yes</option>
                                         <option value="no">No</option>
                                     </select>
                                 </p>
                                 <p>
                                     <select class="isDelivered">
-                                        <option value="yes">Have you got delivered?</option>
+                                        <option value="yes">Have you got delivered? (yes)</option>
                                         <option value="yes">Yes</option>
                                         <option value="no">No</option>
                                     </select>
+                                </p>
+                                <p>
+                                    <input type="text" class="remark" placeholder="Amount Paid" required="required" autocomplete="off">
                                 </p>
                             </div>
                             <div class="button">
@@ -314,21 +328,52 @@ $rows = mysqli_fetch_assoc($results)
                     <div class="showing-container" id="data_lockdown">
                     </div>
                 </div>
+                <div class="of_customers allboards">
+                    Hello World
+                </div>
             </div>
         </div>
     </section>
     <?php
-    
+        // getting all the years in databases
+        $query = mysqli_query($conn, "SELECT `year` FROM `transactions` ORDER BY `year` ASC");
+        $final_array = [["Year", "Sales", "Expenses", "Profit"]];
+        $on_current_year = '';
+        $count = 0;
+        while($date_rows = mysqli_fetch_array($query)){
+            if($on_current_year != $date_rows[0]){
+                $nowyear = $date_rows[0];
+                // Sales: Orders
+                $qone = mysqli_query($conn, "SELECT `ref`,`comtotal` FROM `orders` WHERE `year`='$nowyear'");
+                $totalSales = 0;
+                $now_ref = '';
+                while($fortotal = mysqli_fetch_array($qone)){
+                    if($now_ref != $fortotal[0]){
+                        $totalSales += intval($fortotal[1]);
+                        $now_ref = $fortotal[0];
+                    }
+                }
+                // Expenses
+                $qtwo = mysqli_query($conn, "SELECT `ref`,`total` FROM `purchases` WHERE `year`='$nowyear'");
+                $totalexpenses = 0;
+                $thisref = '';
+                while($forexpenses = mysqli_fetch_array($qtwo)){
+                    if($thisref != $forexpenses[0]){
+                        $totalexpenses += intval($forexpenses[0]);
+                        $thisref = $forexpenses[0];
+                    }
+                }
+                $profit = intval($totalSales)-intval($forexpenses);
+                $data_array = [$date_rows[0], $totalSales, $totalexpenses, $profit];
+                array_push($final_array, $data_array);
+                $on_current_year = $date_rows[0];
+                $count++;
+            }
+        }
+        $out = json_encode($final_array);
+        echo $count;
+        echo "<script>const coord = $out</script>";
     ?>
-    <script>
-        const coord = [
-            ['Year', 'Sales', 'Expenses', 'Profit'],
-            ['2004',  1000,      400, 600],
-            ['2005',  1170,      460, 1100],
-            ['2006',  660,       1120, 1200],
-            ['2007',  1030,      540, 1300]
-        ]
-    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

@@ -18,10 +18,17 @@ const menu_this = (arg)=>{
             of_div.classList.remove('opendiv')
         }
     })
+    if(text == ' Transactions'){
+        $.post('/0/showproducts.php', {
+            task: 'task'
+        }, (data, status)=>{
+            const of_transactions_history = document.querySelector('.of_transactions .history');
+            of_transactions_history.innerHTML = data;
+        })
+    }
 }
 
 const closing_windows = (id)=>{
-    console.log(id);
     const getwindow = document.getElementById(id)
     getwindow.classList.remove('activate')
 }
@@ -113,35 +120,13 @@ const viewMineOrders = (refno)=>{
     $.post('/0/showproducts.php', {
         refno
     },(data, status)=>{
-        const alldatas = data.split(',')
-        const customers_name = alldatas[0].split(';')[0]
-        const date = alldatas[0].split(';')[6]
-        const address = alldatas[0].split(';')[7]
+        const arr = data.split(';;')
         const showing_output_of_orders = document.getElementById('showing_output_of_orders')
         // Adding main details
         const details_div = showing_output_of_orders.querySelector('.details')
-        tag = `
-        <p>Name: <span>${customers_name}</span></p>
-        <p>Ref no.: <span>${refno}</span></p>
-        <p>Order Date: <span>${date}</span></p>
-        <p>Address: <span>${address}</span></p>
-        `
-        details_div.innerHTML = tag
+        details_div.innerHTML = arr[0]
         const itemsdetails = showing_output_of_orders.querySelector('.itemlist')
-        let total = 0
-        let tager = ''
-        for(let i=0; i < alldatas.length-1; i++){
-            const selection = alldatas[i].split(';')
-            tager += `
-            <p>${selection[1] == null ? 0 : selection[1]} &times; ${selection[2] == null ? 0 : selection[2]} @ ${selection[3] ==null ? 0 : selection[3]}</p>
-            `
-            total += calculate(selection[2], selection[3])
-            
-        }
-        tager += `
-            <p class="complete">Total: ${total}/-</p>                
-        `
-        itemsdetails.innerHTML = tager
+        itemsdetails.innerHTML = arr[1]
         showing_output_of_orders.querySelector('.buttons .editit').setAttribute('onclick', `editthusout('${refno}')`)
         showing_output_of_orders.classList.add('activate')
     })
@@ -292,7 +277,6 @@ const data_view = ()=>{
         typed,
     }, (data, status)=>{
         output_area.innerHTML = data;
-        console.log(status);
     })
 }
 
@@ -307,7 +291,6 @@ const show = (ref_no)=>{
     })
 }
 
-
 const make_purchase_please = ()=>{
     const main_container = document.getElementById('making_purchase')
     /* Collecting Static Datas */
@@ -316,6 +299,7 @@ const make_purchase_please = ()=>{
     const payment_type = main_container.querySelector('.shopkeeperdetails p .payment_type').value
     const ispaid = main_container.querySelector('.shopkeeperdetails p .ispaid').value
     const isdelivered = main_container.querySelector('.shopkeeperdetails p .isDelivered').value
+    let amount_received = main_container.querySelector('.shopkeeperdetails p .remark').value
     let account;
     if (payment_type === 'Bank Transfer'){
         account = prompt('Account Number (Receiver)')
@@ -351,18 +335,30 @@ const make_purchase_please = ()=>{
         side_data.push(itemname, unit, rate, quantity, tots)
         datas.push(side_data)
     })
+    let debit, credit;
+    if(amount_received > total){
+        debit = amount_received - total
+        credit = 0
+    }else if(amount_received < total){
+        credit = total - amount_received
+        debit = 0
+    }else{
+        credit = 0
+        debit = 0
+    }
     $.post('/0/inventory.php', {
         shopname,
         shopaddress,
         ispaid,
         isdelivered,
+        debit,
+        credit,
         payment_type,
         account,
         finalDate,
         total,
         constdata: datas
     }, (data, status)=>{
-        console.log(data);
         inner_items.forEach(m => {
             if(m.getAttribute(['data-index']) != '1'){
                 m.remove()
@@ -445,7 +441,6 @@ const showprod = ()=>{
         showprod: 'show'
     }, (data, status)=>{
         const showing_products = document.querySelector('.showing_products .details')
-        console.log(data);
         showing_products.innerHTML = data;
     })
 }
@@ -464,5 +459,8 @@ of_transactions_select.addEventListener('change', ()=>{
     value = of_transactions_select.value
     $.post('/0/showproducts.php', {
         value
+    }, (data, status)=>{
+        const of_transactions_out = document.querySelector('.of_transactions .options .output')
+        of_transactions_out.innerHTML = data
     })
 })
