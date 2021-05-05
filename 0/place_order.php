@@ -47,24 +47,22 @@
             '$customer','$data[0]','$data[1]','$data[2]','$refno','PENDING','$date','$customer_address','$total_received_amount','$data[3]', '$bepaid', '$bereturned')");
             $new_query = mysqli_query($conn, "SELECT `quantity` FROM `products` WHERE `name`='$data[0]'");
             if(mysqli_num_rows($new_query) > 0){
-                $row = mysqli_fetch_array($query);
+                $row = mysqli_fetch_array($new_query);
                 $ne = $row[0] - $data[1];
                 mysqli_query($conn, "UPDATE `products` SET `quantity`='$ne' WHERE `name`='$data[0]'");
             }
         }
         mysqli_query($conn, "INSERT INTO `transactions`(`refno`, `trans_type`) VALUES ('$refno','orders')");
-        header("Content-Type: application/json");
         $update_customer = mysqli_query($conn, "SELECT * FROM `customers` WHERE `name`='$customer'");
         if(mysqli_num_rows($update_customer) > 0){
-            // Update it else
             $row = mysqli_fetch_array($update_customer);
             $amount_paid = $row[2] + $amount_received;
             $dc = $row[4] + $test_amout;
             mysqli_query($conn, "UPDATE INTO `customers` SET `paid`='$amount_paid', `dc`='$dc' WHERE `name`='$customer'");
         }else{
-            // Add it here
             mysqli_query($conn, "INSERT INTO `customers`(`name`,`paid`,`received`,`dc`) VALUES('$customer', '$amount_received', '0', '$test_amout')");
         }
+        header("Content-Type: application/json");
         echo json_encode([$refno, $test_amout, $date, $total_received_amount, $amount_received]);
     }
     if(isset($_POST['type'])){

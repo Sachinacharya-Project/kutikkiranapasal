@@ -4,16 +4,13 @@ $(document).ready(()=>{
         const customer_name_bar = document.getElementById('customersName')
         const customersaddress_bar = document.querySelector(".customersaddress");
         const amount_received_bar = document.querySelector(".asking_amount");
-
         let customer = customer_name_bar.value
         const customersnames = customer.split(' ')
         customer = ''
         customersnames.forEach(partedname =>{
             customer += partedname.charAt(0).toUpperCase() + partedname.slice(1)+' '
         })
-
         customeraddress = customersaddress_bar.value
-
         amount_received = amount_received_bar.value
         let date = new Date();
         const year = date.getFullYear();
@@ -85,9 +82,7 @@ $(document).ready(()=>{
         })
     })
     const view_order = document.getElementById('view-orders')
-    // Divinsion
     const viewing_orders = document.querySelector('.viewing-orders .details')
-    // Events
     view_order.addEventListener('click', ()=>{
         $.post('/0/showproducts.php', 
         {
@@ -128,15 +123,12 @@ $(document).ready(()=>{
         })
     }
 })
-
 const customersNameLive = document.querySelector('.customersNameLive')
 const all_the_customer = document.querySelector('.all_the_customer')
-
 const update_customer_name = (data)=>{
     customersNameLive.value = data;
     all_the_customer.classList.remove('active')
 }
-
 document.addEventListener('click', (e)=>{
     if(e.target.classList.contains('target_free') || e.target.classList.contains("customersNameLive")){
     }else{

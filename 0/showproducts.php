@@ -222,12 +222,14 @@
                     $total_index = 9;
                     $debit_index = 11;
                     $credit_index = 12;
+                    $received_index = 10;
                 }else{
                     $name_index = 2;
                     $add_in = 3;
                     $total_index = 13;
                     $debit_index = 17;
                     $credit_index = 18;
+                    $received_index = 19;
                 }
                 $q = mysqli_query($conn, "SELECT * FROM $trans WHERE `ref`='$refno'");
                 $rowa = mysqli_fetch_array($q);
@@ -245,7 +247,8 @@
                     <p><span>Name: </span>$rowa[$name_index]</p>
                     <p><span>Last Transaction: </span>$date</p>
                     <p><span>Address: </span>$rowa[$add_in]</p>
-                    <p><span>Total Transaction: </span>$rowa[$total_index]/-</p>
+                    <p><span>Amount Received: </span>$rowa[$received_index]/-</p>
+                    <p><span>Cost: </span>$rowa[$total_index]/-</p>
                     <p>$return_amount</p>
                 </li>
                 ";
@@ -330,6 +333,7 @@
         if(mysqli_num_rows($trans_query) > 0){
             while($trans_rows = mysqli_fetch_array($trans_query)){
                 $refno = $trans_rows[1];
+                // $column_name = "received_amount";
                 $column_name = "total";
                 if($trans_rows[2] == 'orders'){
                     $column_name = "comtotal";

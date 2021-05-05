@@ -48,6 +48,8 @@
         $debit = $_POST['debit'];
         $credit = $_POST['credit'];
         $datastring = 'No Debit or Credit';
+        // Total Amount received
+        $standard_amount = $total + $debit + $credit;
         if($debit != 0){
             $datastring = "$debit (Debit)";
         }elseif($credit != 0){
@@ -82,7 +84,8 @@
             <p><span>Delivery Status: </span>$issdelivered</p>
             <p><span>Payment Type: </span>$payment_type</p>
             <p><span>$dist</span>: $account</p>
-            <p><span>Total: </span>$total</p>
+            <p><span>Paid Amount: </span>$standard_amount</p>
+            <p><span>Total Cost: </span>$total</p>
             <p><span>Debit/Credit: </span>$datastring</p>
         </div>
         <br>
@@ -101,7 +104,7 @@
             $thistotal = $data[4];
             $arra = [[$productname, $quantity]];
             update_orders($conn, $arra);
-            $query = "INSERT INTO `purchases` (`ID`, `ref`, `name`, `address`, `product`, `unit`, `rate`, `quantity`, `orderdate`, `ispaid`, `isdelivered`, `payment_by`, `selftotal`, `total`, `iscompleted`, `extra`, `bepaid`, `bereturned`) VALUES (NULL, '$refno', '$shopname', '$shopaddress', '$productname', '$unit', '$rate', '$quantity', '$orderdate', '$ispaid', '$isdelivered', '$payment_type', '$thistotal', '$total', '$icon', '$account', $debit, $credit)";
+            $query = "INSERT INTO `purchases` (`ID`, `ref`, `name`, `address`, `product`, `unit`, `rate`, `quantity`, `orderdate`, `ispaid`, `isdelivered`, `payment_by`, `selftotal`, `total`, `iscompleted`, `extra`, `bepaid`, `bereturned`, `paid_amount`) VALUES (NULL, '$refno', '$shopname', '$shopaddress', '$productname', '$unit', '$rate', '$quantity', '$orderdate', '$ispaid', '$isdelivered', '$payment_type', '$thistotal', '$total', '$icon', '$account', $debit, $credit, '$standard_amount')";
             $sql = mysqli_query($conn, $query);
             $output .= "
             <li>

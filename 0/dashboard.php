@@ -20,6 +20,7 @@ $rows = mysqli_fetch_assoc($results)
     <link href="https://fonts.googleapis.com/css2?family=Allan&family=Anton&family=Bebas+Neue&family=Courgette&family=Imbue&family=Kaushan+Script&family=Lobster&family=Nova+Square&family=Oswald:wght@300;400&family=PT+Sans+Narrow&family=Pathway+Gothic+One&family=Poppins&family=Potta+One&family=Righteous&family=Roboto:wght@300;400&family=Squada+One&family=Teko:wght@300;400&family=Trade+Winds&family=Yanone+Kaffeesatz:wght@400;500&family=Yellowtail&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/costumers.css">
     <title>Dashboard | <?php echo $rows["name"]; ?></title>
 </head>
 <body>
@@ -89,7 +90,7 @@ $rows = mysqli_fetch_assoc($results)
                         </div>
                     </div>
                 </div>
-                <div class="of_orders allboards opendiv">
+                <div class="of_orders allboards">
                     <div class="topmemenus">
                         <h1>Choose: </h1>
                         <button class="create-orders" id='create-orders' onclick="opening_windows('creating_orders')">Create Order</button>
@@ -328,8 +329,24 @@ $rows = mysqli_fetch_assoc($results)
                     <div class="showing-container" id="data_lockdown">
                     </div>
                 </div>
-                <div class="of_customers allboards">
-                    Hello World
+                <div class="of_customers allboards opendiv">
+                    <div class="inner_container">
+                        <h1>Customers</h1>
+                        <div class="options">
+                            <select class="customers_options">
+                                <option value="from_coder_null">Filter</option>
+                                <option value="from_coder_show_all">Show All</option>
+                                <option value="from_coder_debit">Customers with Debit</option>
+                                <option value="from_coder_credit">Customers with Credit</option>
+                            </select>
+                        </div>
+                        <div class="search_area">
+                            <input type="text" class="customer_live_search_here" autocomplete="current-password_xa_bhne_bhn" placeholder="Search Customer with name">
+                        </div>
+                        <div class="customers_area_will_be_here">
+                         
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -379,6 +396,7 @@ $rows = mysqli_fetch_assoc($results)
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="/assets/js/dashboard.js"></script>
     <script src="/assets/js/createOrder.js"></script>
+    <script src="/assets/js/customers.js"></script>
     <script type="module" src="/assets/js/chart.js"></script>
 </body>
 </html>
