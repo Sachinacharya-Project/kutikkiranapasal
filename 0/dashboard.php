@@ -21,6 +21,11 @@ $rows = mysqli_fetch_assoc($results)
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/costumers.css">
+    <style>
+        .dbcd{
+            background: black;
+        }
+    </style>
     <title>Dashboard | <?php echo $rows["name"]; ?></title>
 </head>
 <body>
@@ -62,7 +67,7 @@ $rows = mysqli_fetch_assoc($results)
                 </div>
             </div>
             <div class="sidesections">
-                <div class="of_dashboard allboards">
+                <div class="of_dashboard allboards opendiv">
                     <div class="analytics">
                         <div class="container">
                             <h1>Graph</h1>
@@ -297,7 +302,6 @@ $rows = mysqli_fetch_assoc($results)
                                 <button onclick="data_view()">Show!</button>
                             </div>
                             <div class="containers">
-                                
                             </div>
                         </div>
                         <div class="adding_products" id="adding_products">
@@ -328,9 +332,11 @@ $rows = mysqli_fetch_assoc($results)
                     </div>
                     <div class="showing-container" id="data_lockdown">
                     </div>
+                    <div class="iamediting_purchases dump_here_purchase" id="iamediting_purchases">
+                    </div>
                 </div>
-                <div class="of_customers allboards opendiv">
-                    <div class="inner_container">
+                <div class="of_customers allboards">
+                    <div class="inner_container activate">
                         <h1>Customers</h1>
                         <div class="options">
                             <select class="customers_options">
@@ -347,48 +353,31 @@ $rows = mysqli_fetch_assoc($results)
                          
                         </div>
                     </div>
+                    <div class="showing_out" id="showing_out">
+                       
+                            <li>
+                                <p><strong>Product: </strong>Ghee</p>
+                                <p><strong>Quantity: </strong>12</p>
+                                <p><strong>Rate: </strong>1200/-</p>
+                                <p><strong>Cost: </strong>1200/-</p>
+                            </li>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     <?php
         // getting all the years in databases
-        $query = mysqli_query($conn, "SELECT `year` FROM `transactions` ORDER BY `year` ASC");
+        $query = mysqli_query($conn, "SELECT `year`, `refno` FROM `transactions` ORDER BY `year` ASC");
         $final_array = [["Year", "Sales", "Expenses", "Profit"]];
-        $on_current_year = '';
-        $count = 0;
-        while($date_rows = mysqli_fetch_array($query)){
-            if($on_current_year != $date_rows[0]){
-                $nowyear = $date_rows[0];
-                // Sales: Orders
-                $qone = mysqli_query($conn, "SELECT `ref`,`comtotal` FROM `orders` WHERE `year`='$nowyear'");
-                $totalSales = 0;
-                $now_ref = '';
-                while($fortotal = mysqli_fetch_array($qone)){
-                    if($now_ref != $fortotal[0]){
-                        $totalSales += intval($fortotal[1]);
-                        $now_ref = $fortotal[0];
-                    }
-                }
-                // Expenses
-                $qtwo = mysqli_query($conn, "SELECT `ref`,`total` FROM `purchases` WHERE `year`='$nowyear'");
-                $totalexpenses = 0;
-                $thisref = '';
-                while($forexpenses = mysqli_fetch_array($qtwo)){
-                    if($thisref != $forexpenses[0]){
-                        $totalexpenses += intval($forexpenses[0]);
-                        $thisref = $forexpenses[0];
-                    }
-                }
-                $profit = intval($totalSales)-intval($forexpenses);
-                $data_array = [$date_rows[0], $totalSales, $totalexpenses, $profit];
-                array_push($final_array, $data_array);
-                $on_current_year = $date_rows[0];
-                $count++;
+        if(mysqli_num_rows($query) > 0){
+            while($rows = mysqli_fetch_array($query)){
+                $year = $rows[0];
+                $refno = $rows[1];
+                $sales = 0;
+                $expenses = 0;
             }
         }
-        $out = json_encode($final_array);
-        echo $count;
         echo "<script>const coord = $out</script>";
     ?>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>

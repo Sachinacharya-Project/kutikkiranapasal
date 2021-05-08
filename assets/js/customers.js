@@ -36,3 +36,22 @@ select_options.addEventListener('change', ()=>{
         }
     })
 })
+
+const close_th = ()=>{
+    document.querySelector(".inner_container").classList.add("activate")
+    document.querySelector(".showing_out").classList.remove("activate")
+}
+
+const customer_preview = (item)=>{
+    let index = item.getAttribute(["data-index"])
+    $.post("../../0/customers.php", {
+        get_s: index
+    }, (data, status)=>{
+        const output = document.querySelector(".showing_out")
+        if(data){
+            output.innerHTML = data
+            output.classList.add("activate")
+            document.querySelector(".inner_container").classList.remove("activate")
+        }
+    })
+}

@@ -4,12 +4,16 @@
 
 .of_customers .inner_container {
   border-radius: 10px;
-  display: block;
   max-width: 400px;
   padding: 20px 10px 10px 10px;
   background: rgba(255, 255, 255, 0.2);
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
+  display: none;
+}
+
+.of_customers .inner_container.activate {
+  display: block;
 }
 
 .of_customers .inner_container h1 {
@@ -73,5 +77,98 @@
 
 .of_customers .inner_container .customers_area_will_be_here li.credit {
   background: rgba(255, 0, 0, 0.3);
+}
+
+.of_customers .showing_out {
+  display: none;
+  border-radius: 10px;
+  max-width: 400px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  color: white;
+  text-shadow: 0 0 20px #000;
+  font-family: "Roboto", sans-serif;
+}
+
+.of_customers .showing_out.activate {
+  display: block;
+}
+
+.of_customers .showing_out h1 {
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+
+.of_customers .showing_out .basic_details {
+  width: 100%;
+  font-size: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+}
+
+.of_customers .showing_out .products_list {
+  width: 100%;
+  height: 200px;
+  padding: 10px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+  overflow-y: visible;
+}
+
+.of_customers .showing_out .products_list li {
+  width: 100%;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  list-style: none;
+  border-radius: 10px;
+}
+
+.of_customers .showing_out .buttons {
+  width: 100%;
+}
+
+.of_customers .showing_out .buttons button {
+  width: 100%;
+  padding: 3px;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+  cursor: pointer;
+}
+
+.debitlight {
+  background-color: rgba(0, 128, 122, 0.6) !important;
+}
+
+.creditlight {
+  background-color: rgba(243, 73, 31, 0.6) !important;
+}
+
+.debit {
+  color: orangered;
+  font-family: "Poppins", sans-serif;
+  text-shadow: 0 0 20px #000;
+}
+
+.credit {
+  color: red;
+  font-family: "Poppins", sans-serif;
 }
 /*# sourceMappingURL=costumers.css.map */

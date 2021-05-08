@@ -27,12 +27,10 @@ const menu_this = (arg)=>{
         })
     }
 }
-
 const closing_windows = (id)=>{
     const getwindow = document.getElementById(id)
     getwindow.classList.remove('activate')
 }
-
 const opening_windows = (id)=>{
     const special_context = ['creating_orders', 'viewing-orders']
     const index = special_context.indexOf(id)
@@ -55,7 +53,6 @@ const opening_windows = (id)=>{
         })
     }
 }
-
 count = 1
 const add_product = ()=>{
     count += 1
@@ -102,10 +99,8 @@ const add_product = ()=>{
     myspan.setAttribute('data-total', '0')
     itemdiv.appendChild(myspan)
 }
-
 // Adding Addbutton Container
 document.getElementById('add_prod').addEventListener('click', add_product)
-
 const calculateTotal = (param)=>{
     const quantityItem = document.getElementById(count)
     const quantity = quantityItem.querySelector('.itemquantity').value
@@ -115,7 +110,6 @@ const calculateTotal = (param)=>{
     board.textContent = `Total: ${total}/-`
     board.setAttribute('data-total', total)
 }
-
 const viewMineOrders = (refno)=>{
     $.post('/0/showproducts.php', {
         refno
@@ -131,7 +125,6 @@ const viewMineOrders = (refno)=>{
         showing_output_of_orders.classList.add('activate')
     })
 }
-
 const printout = ()=>{
     const maindiv = document.querySelector('.showing_output_of_orders .contents').innerHTML
     const backup = document.body.innerHTML
@@ -139,7 +132,6 @@ const printout = ()=>{
     window.print()
     document.body.innerHTML = backup
 }
-
 const editthusout = (refno)=>{
     // Collecting Output Space
     const editing_content = document.getElementById('editing_content')
@@ -154,11 +146,8 @@ const editthusout = (refno)=>{
         editing_content.classList.add('activate')
     })
 }
-
 const updateContents = ()=>{
     const mainContainer = document.querySelector('.editing_content')
-    const customersname = mainContainer.querySelector('.details .nameCos .cosname').value
-    const address = mainContainer.querySelector('.details .addrCos .cosaddr').value
     const allitems = mainContainer.querySelectorAll('.items-editing .items')
     let total = 0
     allitems.forEach(minor =>{
@@ -176,8 +165,6 @@ const updateContents = ()=>{
         $.post('/0/place_order.php', {
             type: 'type',
             total,
-            customersname,
-            address,
             id: minor.getAttribute(['data-id']),
             quantity,
             rate,
@@ -185,8 +172,6 @@ const updateContents = ()=>{
             states
         }, (data, status)=>{
             minor.remove()
-            //details items-editing
-
         })
     })
 
@@ -195,7 +180,6 @@ const updateContents = ()=>{
     mainContainer.classList.remove('activate')
     swal("Updated Products", "The Orders has been updated Successfully!", "success");
 }
-
 loading_counter = 2
 const create_new_tab = ()=>{
     const main_container = document.querySelector('.of_inventory .allcontainers .purchasing-items')
@@ -251,11 +235,9 @@ const create_new_tab = ()=>{
     }, 200)
     loading_counter++;
 }
-
 const calculate = (amount, rate)=>{
     return amount * rate
 }
-
 const closer_look = (id)=>{
     const ids = ['viewing_purchases', 'making_purchase', 'adding_products', 'showing_products']
     ids.forEach(simps => {
@@ -269,7 +251,6 @@ const closer_look = (id)=>{
         showprod();
     }
 }
-
 const data_view = ()=>{
     const typed = document.getElementById('filtering_this_item').value
     const output_area = document.querySelector(".allcontainers .viewing_purchases .containers")
@@ -279,7 +260,6 @@ const data_view = ()=>{
         output_area.innerHTML = data;
     })
 }
-
 const show = (ref_no)=>{
     const showing_container = document.getElementById('data_lockdown')
     $.post('/0/inventory.php', {
@@ -290,7 +270,6 @@ const show = (ref_no)=>{
         showing_container.classList.add('activate')
     })
 }
-
 const make_purchase_please = ()=>{
     const main_container = document.getElementById('making_purchase')
     /* Collecting Static Datas */
@@ -376,7 +355,6 @@ const make_purchase_please = ()=>{
         swal(`You Have Total Expenditure of Rs ${total}/-`)
     })
 }
-
 const update_total = (index)=>{
     const main_container = document.querySelectorAll('.of_inventory .allcontainers .purchasing-items .items')
     const quantity = main_container[index-1].querySelector('.quantity').value
@@ -385,7 +363,6 @@ const update_total = (index)=>{
     const total = calculate(quantity, rate)
     total_div.textContent = `Total: ${total}/-`
 }
-
 let prodcout = 2
 const create_add_product = ()=>{
     const main_container = document.querySelector('.adding_products .innerHtml .details')
@@ -402,7 +379,6 @@ const create_add_product = ()=>{
     main_container.insertAdjacentHTML('afterbegin', templete)
     prodcout++;
 }
-
 const save_product = (args)=>{
     if(args == 'saving'){
         const myarray = [];
@@ -431,7 +407,6 @@ const save_product = (args)=>{
         })
     }
 }
-
 const of_inventory_select = document.querySelector(".of_inventory .controllers select")
 of_inventory_select.addEventListener('change', ()=>{
     closer_look(of_inventory_select.value)
@@ -444,7 +419,6 @@ const showprod = ()=>{
         showing_products.innerHTML = data;
     })
 }
-
 const show_selected = ()=>{
     const creating_orders = document.querySelector('.creating_orders .items-details .items select')
     $.post('/0/place_order.php', {
@@ -453,7 +427,6 @@ const show_selected = ()=>{
         creating_orders.innerHTML = data;
     })
 }
-
 const of_transactions_select = document.querySelector('.of_transactions .options select')
 of_transactions_select.addEventListener('change', ()=>{
     value = of_transactions_select.value
@@ -464,3 +437,69 @@ of_transactions_select.addEventListener('change', ()=>{
         of_transactions_out.innerHTML = data
     })
 })
+const edit_purchases_item = (refno)=>{
+    const showing_container = document.getElementById('data_lockdown')
+    showing_container.classList.remove("activate")
+    $.post("../../0/inventory.php", {
+        update_purchase: refno
+    }, (data, status)=>{
+        if(data)
+        {
+            const dump_area = document.querySelector('.dump_here_purchase')
+            dump_area.innerHTML = data
+            opening_windows("iamediting_purchases")
+            // console.log(data);
+        }
+    })
+}
+
+const update_price_tag = (btn_is)=>{
+    const output = document.getElementById("here_is_new")
+    const value = btn_is.value
+    const pretotal = document.getElementById("act_tot").textContent
+    // const pretotal = output.textContent
+    const new_paid = parseInt(value) + parseInt(pretotal);
+    output.textContent = new_paid;
+    output.setAttribute("data-tots", new_paid)
+}
+
+const toreceived_amount = (btn_is)=>{
+    const output = document.getElementById("behere_is_new")
+    const value = btn_is.value
+    const pretotal = document.getElementById("beact_tot").textContent
+    const new_paid = parseInt(pretotal) - parseInt(value);
+    output.textContent = new_paid;
+    output.setAttribute("data-tots", new_paid)
+}
+
+const updates_purchase_with_new = (refno)=>{
+    const main_container = document.getElementById('iamediting_purchases')
+    const ispaid = main_container.querySelector(".editables .ispaid").value
+    const isdelivered = main_container.querySelector(".editables .isdelivered").value
+    const total_paid_div = main_container.querySelector(".amounts .here_is_new") || null
+    let total_paid = 0
+    if(total_paid_div != null){
+        total_paid = total_paid_div.getAttribute(['data-tots'])
+    }
+    const received_div = main_container.querySelector(".received .here_is_new") || null
+    let received = 0
+    if(received_div != null)
+    received = received_div.getAttribute(['data-tots'])
+    $.post("../../0/inventory.php", {
+        new_datas: [refno, ispaid, isdelivered, total_paid, received]
+    }, (data, status)=>{
+        swal("Update Success", "Purchases has been updated successfully", "success")
+        closing_windows("iamediting_purchases")
+    })
+}
+
+// Okay button at purchase preview
+const nada = (daa)=>{
+    closing_windows(daa)
+    opening_windows("viewing_purchases")
+}
+// Okay button at purchase preview
+const nadanada = (daa)=>{
+    closing_windows(daa)
+    opening_windows("making_purchase")
+}

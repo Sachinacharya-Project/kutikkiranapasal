@@ -156,8 +156,8 @@
         $row1 = mysqli_fetch_array(mysqli_query($conn, "SELECT `customer`, `address` FROM `orders` WHERE `ref`='$refno'"));
         $output = "<h1>Editing Orders</h1>
         <div class='details'>
-        <p class='nameCos'>Customers Name: <input type='text' name='consname' id='consname' class='cosname' autocomplete='off' required='required' value='$row1[0]'></p>
-        <p class='addrCos'>Address: <input type='text' name='cosaddr' class='cosaddr' id='cosaddr' autocomplete='off' required value='$row1[1]'></p>
+        <p class='nameCos'>Name: $row1[0]</p>
+        <p class='addrCos'>Address: $row1[1]</p>
         </div>
         <div class='items-editing'>
         ";
@@ -220,8 +220,8 @@
                     $name_index = 1;
                     $add_in = 8;
                     $total_index = 9;
-                    $debit_index = 11;
-                    $credit_index = 12;
+                    $debit_index = 12;
+                    $credit_index = 13;
                     $received_index = 10;
                 }else{
                     $name_index = 2;
@@ -235,9 +235,9 @@
                 $rowa = mysqli_fetch_array($q);
                 if(intval($rowa[$debit_index]) != 0 || intval($rowa[$credit_index]) != 0){
                     if(intval($rowa[$debit_index]) == 0){
-                        $return_amount = "<span>Credited Amount:</span> $rowa[$credit_index]/-";
+                        $return_amount = "<span class='credit'><span>Credited Amount:</span> $rowa[$credit_index]/-</span>";
                     }else{
-                        $return_amount = "<span>Debited Amount:</span> $rowa[$debit_index]/-";
+                        $return_amount = "<span class='debit'><span>Debited Amount:</span> $rowa[$debit_index]/-</span>";
                     }
                 }else{
                     $return_amount = "No Debit or Credit";
@@ -264,7 +264,7 @@
                     $name_index = 1;
                     $add_in = 8;
                     $total_index = 9;
-                    $debit_index = 11;
+                    $debit_index = 12;
                 }else{
                     $name_index = 2;
                     $add_in = 3;
@@ -295,7 +295,7 @@
                     $name_index = 1;
                     $add_in = 8;
                     $total_index = 9;
-                    $credit_index = 12;
+                    $credit_index = 13;
                 }else{
                     $name_index = 2;
                     $add_in = 3;
@@ -311,7 +311,7 @@
                         <p><span>Last Transaction: </span>$date</p>
                         <p><span>Address: </span>$rowa[$add_in]</p>
                         <p><span>Total Transaction: </span>$rowa[$total_index]/-</p>
-                        <p><span>Debited Amount: $rowa[$credit_index]/-</span></p>
+                        <p><span>Credited Amount: $rowa[$credit_index]/-</span></p>
                     </li>
                     ";
                 }
@@ -334,14 +334,14 @@
             while($trans_rows = mysqli_fetch_array($trans_query)){
                 $refno = $trans_rows[1];
                 // $column_name = "received_amount";
-                $column_name = "total";
+                $column_name = "paid_amount";
                 if($trans_rows[2] == 'orders'){
-                    $column_name = "comtotal";
+                    $column_name = "received_amount";
                 }
                 $exact_query = mysqli_query($conn, "SELECT `$column_name`, `bepaid`, `bereturned` FROM `$trans_rows[2]` WHERE `ref`='$refno'");
                 if(mysqli_num_rows($exact_query) > 0){
                     $q = mysqli_fetch_array($exact_query);
-                    $total += (intval($q[0])+intval($q[1]) + intval($q[2]));
+                    $total += intval($q[0]);
                     $credit += intval($q[2]);
                     $debit += intval($q[1]);
                 }
